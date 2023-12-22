@@ -1,0 +1,5 @@
+#!/bin/bash
+# switch between two locals (currently us and es)
+
+setxkbmap $(echo "$(setxkbmap -query | tail -n1 | awk '{print $2}')" | sed 'y/eu/ue/')
+xmodmap $HOME/.Xmodmap

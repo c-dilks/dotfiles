@@ -1,0 +1,97 @@
+[begin] (fluxbox)
+[exec] (xterm) {/usr/bin/xterm}
+[exec] (firefox) {/usr/bin/firefox}
+#[exec] (chrome) {/usr/bin/google-chrome --enable-plugins}
+#[exec] (chrome-proxy) {/usr/bin/google-chrome --enable-plugins --proxy-server=192.168.1.165:3128}
+#[exec] (chrome-bnl-out) {/usr/bin/google-chrome --enable-plugins --proxy-server=192.168.1.140:3128}
+[exec] (rox) {/usr/bin/rox-filer}
+[exec] (thunar) {/usr/bin/thunar}
+[separator]
+[submenu] (audio)
+  [exec] (audacity) {/usr/bin/audacity}
+  [exec] (ardour) {/usr/bin/ardour2}
+  [exec] (hydrogen) {/usr/bin/hydrogen}
+  [separator]
+  #[exec] (alsamixer) {xterm -e alsamixer}
+  [exec] (JACK) {/usr/bin/qjackctl}
+  [exec] (pavucontrol) {/usr/bin/pavucontrol}
+[end]
+[submenu] (editors)
+  [exec] (leafpad) {/usr/bin/leafpad}
+  [exec] (vim) {/usr/bin/xterm -e /usr/bin/vim}
+  [exec] (emacs) {/usr/bin/emacs}
+[end]
+[submenu] (files)
+  [exec] (dolphin) {/usr/bin/dolphin}
+  [exec] (thunar) {/usr/bin/thunar}
+  [exec] (rox) {/usr/bin/rox-filer}
+[end]
+[submenu] (games)
+  [exec] (sauerbraten) {/usr/games/sauerbraten}
+  [exec] (zsnes) {/usr/bin/zsnes}
+[end]
+[submenu] (science)
+  [submenu] (mathematica)
+    [exec] (mathematica) {/usr/local/bin/mathematica}
+    [separator]
+    [exec] (feynarts) {/usr/local/bin/mathematica /home/dilks/.mathematica/feynarts/run.nb}
+    [exec] (feynarts_doc) {/usr/bin/evince /home/dilks/.mathematica/feynarts/man.pdf}
+  [end]
+  [exec] (jaxodraw) {/usr/bin/java -jar /home/dilks/builds/jaxodraw-2.1-0/jaxodraw-2.1-0.jar}
+  [exec] (maxima) {/usr/bin/wxmaxima}
+  [separator]
+  [exec] (daedalus) {/usr/bin/wine /home/dilks/.wine/drive_c/DAEDALUS/Daedalus.exe}
+  [exec] (curved space) {/usr/bin/wine /home/dilks/.wine/drive_c/CurvedSpace/launch}
+[end]
+[submenu] (media)
+  #[exec] (clementine) {/usr/bin/clementine}
+  [exec] (guayadeque) {/usr/bin/guayadeque}
+  [exec] (vlc) {/usr/bin/vlc}
+  [exec] (easytag) {/usr/bin/easytag}
+  [separator]
+  [exec] (gimp) {/usr/bin/gimp}
+  [exec] (inkscape) {/usr/bin/inkscape}
+  [exec] (openshot) {/usr/bin/openshot}
+  [separator]
+  [exec] (cheese) {/usr/bin/cheese}
+[end]
+[submenu] (net)
+  [exec] (chromium) {/usr/bin/chromium-browser}
+  [exec] (firefox) {/usr/bin/firefox}
+  [separator]
+  [exec] (pidgin) {/usr/bin/pidgin}
+  [exec] (skype) {/usr/bin/skype}
+  [exec] (seevogh) {/home/dilks/builds/SeeVoghRN/SeeVoghRN}
+  [separator]
+  [exec] (transmission) {/usr/bin/transmission-gtk}
+[end]
+[submenu] (office)
+  [exec] (libreoffice) {/usr/bin/libreoffice}
+  [exec] (writer) {/usr/bin/lowriter}
+  [exec] (calc) {/usr/bin/localc}
+  [exec] (impress) {/usr/bin/loimpress}
+[end]
+[separator]
+[submenu] (flux-menu)
+  [include] (/etc/X11/fluxbox/fluxbox-menu)
+[end]
+[separator]
+[config] (configure)
+[submenu] (style)
+  [exec] (lxappearance) {/usr/bin/lxappearance}
+  #[exec] (thunar ~/bg) {/usr/bin/thunar ~/bg}
+  [exec] (nitrogen) {/usr/bin/nitrogen}
+  [exec] (xscreensaver) {/usr/bin/xscreensaver-demo}
+  [separator]
+  [stylesdir] (/usr/share/fluxbox/styles)
+  [separator]
+  [stylesdir] (~/.fluxbox/styles)
+[end]
+[workspaces] (workspaces)
+[reconfig] (reconfig)
+[restart] (restart)
+[separator]
+#[exec] (suspend) {/home/dilks/bin/goodnight}
+[exec] (gdm) {/usr/bin/gdmflexiserver}
+[exit] (exit)
+[end]

@@ -1,0 +1,27 @@
+#!/bin/tcsh
+if ( $# == "2" ) then
+  if ( $1 == "2" || $1 == "16" ) then
+    @ obase = 18 - $1
+  else
+    set obase=10
+  endif
+  echo "obase=${obase}; ibase=${1}; ${2}" | bc
+else
+  echo "usage: mask ibase number"
+  echo " 0  0000"
+  echo " 1  0001"
+  echo " 2  0010"
+  echo " 3  0011"
+  echo " 4  0100"
+  echo " 5  0101"
+  echo " 6  0110"
+  echo " 7  0111"
+  echo " 8  1000"
+  echo " 9  1001"
+  echo " A  1010"
+  echo " B  1011"
+  echo " C  1100"
+  echo " D  1101"
+  echo " E  1110"
+  echo " F  1111"
+endif

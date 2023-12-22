@@ -1,0 +1,3 @@
+#!/bin/bash
+# run `arxiv-feed` from github.com:c-dilks/arxiv-feed.git
+${HOME}/builds/arxiv-feed/fetch.rb $*

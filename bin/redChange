@@ -1,0 +1,17 @@
+#!/bin/bash
+
+tmpfile=${HOME}/tmp/redshift_temp.txt
+
+if [ ! -f "$tmpfile" ]; then
+  echo '3000' > $tmpfile
+fi
+
+if [ $# -eq 1 ]; then
+  tempNow=$(cat $tmpfile)
+  tempSet=$(echo ${tempNow}+${1} | bc)
+  if [ $tempSet -lt 1000 ]; then tempSet=1000; fi
+  if [ $tempSet -gt 25000 ]; then tempSet=25000; fi
+  echo "current temp = ${tempNow}"
+  echo "new temp     = ${tempSet}"
+  red $tempSet
+fi

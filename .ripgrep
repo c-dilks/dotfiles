@@ -1,0 +1,13 @@
+# ripgrep config file; one shell option per line, set RIPGREP_CONFIG_PATH to point to this file
+
+# follow symlinks or not
+--no-follow
+
+# suppress log messages and errors
+--no-messages
+
+# include dot files
+--hidden
+
+# exclude .git
+--glob=!.git

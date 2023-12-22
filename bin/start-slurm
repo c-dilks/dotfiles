@@ -1,0 +1,28 @@
+#!/bin/bash
+# start SLURM services
+set -e
+
+start() {
+  echo "[+++] STARTING SERVICE $1.service"
+  sudo systemctl start $1.service
+}
+
+status() {
+  echo "[+++] STATUS OF SERVICE $1.service"
+  systemctl status $1.service --no-pager
+}
+
+services=(
+  munge
+  slurmctld
+  slurmd
+)
+
+for service in ${services[@]}; do
+  start $service
+  status $service
+done
+
+echo ""
+echo "[+++] sinfo"
+sinfo

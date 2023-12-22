@@ -1,0 +1,11 @@
+#!/bin/bash
+
+disp="HDMI1"
+width=$(xrandr | grep "$disp connected" | awk '{print $3}' | sed 's/x.*$//g')
+
+if [ $width -eq 1360 ]; then $(which xrandr_mirror)
+elif [ $width -eq 1920 ]; then $(which xrandr_dynex)
+fi
+
+nitrogen --restore
+

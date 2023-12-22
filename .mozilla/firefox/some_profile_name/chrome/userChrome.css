@@ -1,0 +1,12 @@
+/* settings for Tree Style Tab */
+/* requires about:config setting toolkit.legacyUserProfileCustomization.stylesheets to be true */
+
+/* hides the native tabs */
+#TabsToolbar {
+  visibility: collapse;
+}
+
+/* hides the sidebar header */
+#sidebar-header {
+  visibility: collapse !important;
+}

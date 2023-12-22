@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'colorize'
+
+case ARGV.length
+when 1
+  num  = ARGV.first.to_f
+  hour = num.to_i
+  min  = hour>0 ? (num % hour) * 60.0 : num * 60.0
+  puts "#{num} hr"
+  puts " =>  #{hour} hr  #{min} min".colorize(:color => :green, :mode => :bold)
+when 2
+  hour, min = ARGV.map(&:to_f)
+  puts "#{hour} hr  #{min} min"
+  puts " =>  #{hour + min/60} hr".colorize(:color => :green, :mode => :bold)
+else
+  $stderr.puts """
+  USAGE:
+
+    - convert [hour] [min] to [float] hours:
+      #{File.basename $0} [hour] [min]
+
+    - convert [float] hours to [hour] [min]:
+      #{File.basename $0} [float]
+  """
+  exit 2
+end

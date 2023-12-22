@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  inter=5
+else
+  inter=$1
+fi
+
+while [ 1 ]; do
+  condor_q `whoami`
+  sleep $inter
+done

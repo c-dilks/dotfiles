@@ -1,0 +1,6 @@
+Root.ObjectStat: 1
+Root.MemStat: 1
+Root.MemCheck: 1
+Rint.Logon: ~/.rootlogon.C
+Browser.Name: TRootBrowser
+#X11.UseXft: yes

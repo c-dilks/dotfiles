@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+
+require 'awesome_print'
+require 'colorize'
+
+##############################
+FRACTIONS = {
+  :total => 1.0,
+  :BOPS  => 0.8,
+  :BRES  => 0.2,
+}
+DAILY_HOURS = 8.0
+##############################
+
+unless ARGV.length > 0
+  $stderr.puts """
+  USAGE #{File.basename $0} [NUM DAYS]... [SUBTRACTIONS]...
+  - all [NUM DAYS] args will be summed
+  - specify one of the project codes (case insensitive) to start 
+    subtraction mode; all numbers thereafter will be subtracted
+    from the total, so this will tell you how many hours you owe
+    given some number of hours worked
+    - example:
+         5 bres 5
+         owe 3 hours on BRES, since need 8 hours in a 5 day period
+  """
+  exit 2
+end
+
+numDays = 0.0
+subHash = Hash.new
+subProj = nil
+ARGV.each do |arg|
+
+  isKeyword = (Float(arg) rescue nil).nil?
+
+  if isKeyword # is a project code, trigger subtraction mode
+    projIdx = FRACTIONS.keys
+      .map(&:to_s)
+      .map(&:downcase)
+      .find_index(arg.downcase)
+    if projIdx.nil?
+      $stderr.puts "ERROR: project '#{arg}' not found"
+      exit 1
+    end
+    subProj = FRACTIONS.keys[projIdx]
+    subHash[subProj] = 0.0
+
+  else # not a project code
+    if subProj.nil? # subtraction mode is not enabled, count days
+      numDays += arg.to_f
+    else # subtraction mode is enabled
+      subHash[subProj] = subHash[subProj] - arg.to_f
+    end
+  end
+end
+
+# calculate number of required hours
+hourHash = FRACTIONS.map do |name,frac|
+  [ name, frac * DAILY_HOURS * numDays ]
+end.to_h
+
+# calculate number of owed hours
+oweHash = subHash.map do |name,debt|
+  [ name, hourHash[name] + debt ]
+end.to_h
+
+# print
+puts """
+Total Number of Days: #{numDays.to_s.colorize(:color => :green, :mode => :bold)}
+
+Required Hours:
+"""
+ap hourHash.sort.to_h
+puts ""
+
+if subHash.length > 0
+  puts "Owed Hours:"
+  ap oweHash.sort.to_h
+end
+

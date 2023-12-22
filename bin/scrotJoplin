@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# joplin URL; joplin listens on this port for webclipper
+url="http://127.0.0.1:41184/notes"
+
+# take screenshot
+scrot -s
+
+# convert screenshot to 64-bit stream
+img=$(cat $(ls -t *.png | head -n1) | base64)
+
+# create JSON resource
+cat > tempo.json << EOF
+{
+  "title":"Screenshot",
+  "parent_id":"",
+  "image_data_url":"data:image/png;base64,${img}"
+}
+EOF
+
+# invoke POST request
+curl -d @tempo.json -H "Content-Type: application/json" $url
+rm tempo.json

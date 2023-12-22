@@ -1,0 +1,23 @@
+#!/bin/bash
+# kills $1 root script
+
+if [ $# -ne 1 ]; then
+  echo "usage: $0 [script]" >&2
+  exit 1
+fi
+
+pid=$(ps -ef | grep $1 | grep root.exe | awk '{print $2}')
+
+if [ $pid > "0" ]; then
+  echo "kill list:"
+  echo "-----"
+  ps -ef | grep $1 | grep root.exe
+  echo "-----"
+  echo "pid $pid killed"
+  kill $pid
+else
+  echo "$1 not running" >&2
+  exit 1
+fi
+
+exit

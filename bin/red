@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -eq 1 ]; then
+  mkdir -p ${HOME}/tmp
+  echo $1 > ${HOME}/tmp/redshift_temp.txt
+  redshift -x
+  redshift -O $(cat ${HOME}/tmp/redshift_temp.txt)
+fi

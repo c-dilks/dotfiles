@@ -1,0 +1,9 @@
+#!/bin/tcsh
+set t = 0
+set inc = 10
+while (1)
+  set mem = `free -m | grep "Mem" | awk '{print $3}'`
+  echo "${t} ${mem}"
+  @ t = $t + $inc
+  sleep $inc
+end

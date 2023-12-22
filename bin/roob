@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+if ARGV.length<1
+  $stderr.puts """
+  Execute a ROOT macro with a syntax more convenient than shell, allowing
+  for things like tab expansion, and no need to figure out single-quotes;
+  see example below
+
+  USAGE: #{$0} [opt1] [opt2] ... [macro] [arg1] [arg2] ...
+    - [opt*] are options for root, any or none of these single characters:
+      - q to run with \"-b -q\"
+      - p to print the root command, but do not execute
+      - b to run with \"brufit\" instead of \"root\"
+      - do not specify [opt*] if you don't need any
+    - [macro] is the name of the root macro to run
+    - [arg*] is an argument to pass to [macro]
+      - end an argument with \"!\" to make sure it will be surrounded
+        by quotes (do this instead of using quotes)
+
+  EXAMPLE: 
+    - shell version:  root -b -q macro.C'(\"string\",1,3.0)'
+      roob version:   roob q macro.C string! 1 3.0
+  """
+  exit 2
+end
+
+# parse roob arguments
+macroIdx = ARGV.find_index{ |arg| arg.match? /\.C$/ }
+if macroIdx.nil?
+  $stderr.puts "ERROR: you forgot to specify a macro (must end in .C)"
+  exit 1
+end
+opts  = macroIdx>0 ? ARGV[..macroIdx-1] : []
+macro = ARGV[macroIdx]
+args  = ARGV[macroIdx+1..]
+
+# add quotes around strings that end in !
+args.map! do |arg|
+  if arg.match? /!$/
+    "\"#{arg.gsub(/!$/,"")}\""
+  else
+    arg
+  end
+end
+
+# parse options for root
+rootCmd = "root"
+rootCmd += " #{ENV["BRUFIT"]}/macros/LoadBru.C" if opts.include?("b")
+rootCmd += " -b -q" if opts.include? "q"
+printMode = opts.include? "p"
+
+# build root macro shell command
+cmd = "#{rootCmd} '#{macro}(#{args.join ","})'"
+if printMode
+  puts "opts=#{opts}"
+  puts "args=#{args}"
+  puts "\n#{cmd}"
+  exit 0
+end
+
+# execute macro
+system cmd

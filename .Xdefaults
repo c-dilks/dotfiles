@@ -1,0 +1,47 @@
+!!! xterm
+xterm*loginShell:true
+xterm*saveLines:32767
+xterm*background:Black
+xterm*foreground:White
+xterm*scrollBar:false
+xterm*geometry:90x25
+xterm*shading:20
+! xterm*font:terminus-16
+
+!!! urxvt
+urxvt*background:grey7
+! urxvt*foreground:white
+urxvt*foreground:#ff9966
+! urxvt*colorBD:cyan
+! urxvt*colorIT:cyan
+! urxvt*colorUL:cyan
+urxvt*colorBD:white
+urxvt*colorIT:red
+urxvt*colorUL:white
+urxvt*fading:15
+urxvt*cursorColor:cyan
+urxvt*scrollBar:off
+urxvt*cursorBlink:on
+urxvt*saveLines:32767
+
+!!! font
+urxvt*font:       xft:Liberation Mono:style=Regular:pixelsize=16
+urxvt*boldFont:   xft:Liberation Mono:style=Bold:pixelsize=16
+urxvt*italicFont: xft:Liberation Mono:style=Italic:pixelsize=16
+! ---
+! urxvt*font:       xft:Nimbus Mono PS:style=Regular:pixelsize=16
+! urxvt*boldFont:   xft:Nimbus Mono PS:style=Bold:pixelsize=16
+! urxvt*italicFont: xft:Nimbus Mono PS:style=Italic:pixelsize=16
+! ---
+! urxvt*font:       xft:Nimbus Mono PS:style=Regular:pixelsize=16
+! urxvt*boldFont:   xft:Nimbus Mono PS:style=Bold:pixelsize=16
+! urxvt*italicFont: xft:Nimbus Mono PS:style=Italic:pixelsize=16
+! ---
+! urxvt*font:       xft:Hack-Regular:pixelsize=16,xft:Symbola
+! urxvt*boldFont:   xft:Hack-Bold:pixelsize=16:weight=bold,xft:Symbola
+! urxvt*italicFont: xft:Hack-RegularOblique:pixelsize=16:slant=italic,xft:Symbola
+! ---
+
+!!! force blue to be green:
+urxvt*color4:#00ff00
+urxvt*color12:#00ff00

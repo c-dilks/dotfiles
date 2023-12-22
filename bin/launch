@@ -1,0 +1,21 @@
+#!/bin/bash
+# launch common applications on `altair`
+
+xx
+
+i3-msg workspace 1-web
+i3-msg layout toggle tabbed
+sleep 1 ; firefox &
+sleep 1 ; brave &
+# sleep 1 ; zotero &
+sleep 5
+
+i3-msg workspace 10-mail
+sleep 1 ; thunderbird &
+sleep 5
+
+i3-msg workspace 9-notes
+sleep 1 ; joplin &
+sleep 1 ; keepassxc &
+sleep 1 ; $TERM &
+i3-msg layout toggle split

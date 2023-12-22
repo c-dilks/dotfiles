@@ -1,0 +1,2 @@
+#!/bin/bash
+find -name "${2}" -print | grep -i --color=auto "${1}"

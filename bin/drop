@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" == "t" ]; then
+  touch t.tar.gz
+  rm t.tar.gz
+  tar czvf t.tar.gz $2
+  drop t.tar.gz
+  rm t.tar.gz
+  exit
+fi
+
+scp $1 dilks@jftp:/u/home/dilks/drop/
+

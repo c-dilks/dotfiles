@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# restarts pulseaudio and volumeicon so we can send sound through HDMI
+
+pulseaudio --kill
+pulseaudio --start
+pkill volumeicon
+volumeicon &

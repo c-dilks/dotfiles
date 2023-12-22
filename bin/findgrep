@@ -1,0 +1,2 @@
+#!/bin/bash
+find -name "${2}" -print | xargs grep -i -d skip --color=auto "${1}"

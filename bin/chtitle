@@ -1,0 +1,5 @@
+#!/bin/bash
+
+t="xterm"
+if [ $# -gt 0 ]; then t=$1; fi
+echo -e "\033]2;$t\007"

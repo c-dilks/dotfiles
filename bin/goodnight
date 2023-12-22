@@ -1,0 +1,5 @@
+#!/bin/bash
+# suspend to ram
+
+xscreensaver-command --lock
+pmi action suspend

@@ -1,0 +1,3 @@
+#!/bin/bash
+# mount mtp device
+go-mtpfs /media/MyAndroid

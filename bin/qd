@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo """
+  USAGE: $(basename $0) [FILES]...
+  - if the first [FILE] is 't', this will untar the standard tarball
+  """ >&2
+  exit 2
+fi
+
+shared=$HOME/shared
+
+if [ "$1" == "t" ]; then
+  arc=$shared/t.tar.gz
+  echo "=> EXTRACTING TARBALL $arc"
+  tar xzvf $arc
+else
+  echo "=> COPYING FILES TO $shared"
+  for file in $*; do
+    cp -rv $shared/$file ./
+  done
+fi
+
+echo "=> DONE."

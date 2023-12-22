@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo """
+  USAGE: $(basename $0) [STRING]
+  """ >&2
+  exit 2
+fi
+
+shared=$HOME/shared
+echo "$*" > $shared/x
+echo "=> DONE."

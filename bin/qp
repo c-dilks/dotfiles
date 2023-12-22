@@ -1,0 +1,5 @@
+#!/bin/bash
+
+shared=$HOME/shared
+cat $shared/x
+printf $(cat $shared/x) | xclip -i

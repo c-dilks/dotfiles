@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+# an attempt at 'tree' in ruby
+
+require 'pathname'
+
+# args
+dir = ARGV.length>0 ? ARGV[0] : '.'
+
+# add a path to tree
+def add_path_to_tree(path, node)
+  k = path[0]
+  node[k] = Hash.new unless node.key? k
+  add_path_to_tree(path[1..], node[k]) if path.length > 1
+end
+
+# generate the tree
+tre = Hash.new
+Dir.chdir(dir)
+def find_recursive(*paths)
+  paths
+    .flatten
+    .map{ |path| Pathname.new path }
+    .map do |path|
+      if path.file?
+        [path.to_s]
+      else 
+        begin
+          [path.to_s, find_recursive(path.children)]
+        rescue
+          [path.to_s + " => BROKEN SYMLINK"]
+        end
+      end
+    end.flatten
+end
+find_recursive('.')
+  .map{ |path| path.split '/' }
+  .reject{ |path| path==['.'] }
+  .each{ |path| add_path_to_tree path, tre if path.length>0 }
+
+# print it
+def print(path, node)
+  return if node.length == 0
+  node.each do |k, v|
+    indent = path.length
+    puts "#{"|   "*indent}|-- #{k}"
+    print path+[k], v
+  end
+end
+puts ""
+puts dir
+print [], tre
+puts ""

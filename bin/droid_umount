@@ -1,0 +1,3 @@
+#!/bin/bash
+# unmount mtp device
+fusermount -u /media/MyAndroid

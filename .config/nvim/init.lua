@@ -1,0 +1,6 @@
+require('settings')
+require('filetypes')
+require('keys')
+require('plugins')
+require('appearance')
+require('note-taking')

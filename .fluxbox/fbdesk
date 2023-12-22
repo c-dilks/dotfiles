@@ -1,0 +1,12 @@
+session.styleFile:	/home/dilks/.fluxbox/styles/tricky-scythe
+fbdesk.iconAlpha:	255
+fbdesk.lockPositions:	false
+fbdesk.textAlpha:	0
+fbdesk.textPlacement:	Bottom
+fbdesk.snapY:	5
+fbdesk.doubleClickInterval:	200
+fbdesk.font:	fixed
+fbdesk.textBackground:	white
+fbdesk.snapX:	5
+fbdesk.iconFile:	~/.fluxbox/fbdesk.icons
+fbdesk.textColor:	black

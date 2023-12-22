@@ -1,0 +1,236 @@
+# windows key
+set $mod Mod4
+# alt key
+set $alt Mod1
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font xft:Liberation Mono 10
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod+$alt
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+bindsym $alt+Tab exec alacritty
+
+# kill focused window
+bindsym $mod+b kill
+bindsym --release button9 kill
+
+# start launcher
+bindsym $mod+d exec rofi -show run
+
+# disble focus on mouse movement (prevents focus change from accidental touchpad touches)
+focus_follows_mouse no
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# change focus using `sway-overfocus` <https://github.com/korreman/sway-overfocus>
+# bindsym $mod+h exec sway-overfocus split-lt float-lt output-ls
+# bindsym $mod+j exec sway-overfocus split-dt float-dt output-ds
+# bindsym $mod+k exec sway-overfocus split-ut float-ut output-us
+# bindsym $mod+l exec sway-overfocus split-rt float-rt output-rs
+# bindsym $mod+apostrophe exec sway-overfocus group-rw group-dw
+# bindsym $mod+semicolon exec sway-overfocus group-lw group-uw
+
+# alternatively, you can use the cursor keys:
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+o split h
+
+# split in vertical orientation
+bindsym $mod+i split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Left floating toggle
+bindsym $mod+Shift+s sticky toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1     workspace number 1
+bindsym $mod+2     workspace number 2
+bindsym $mod+3     workspace number 3
+bindsym $mod+4     workspace number 4
+bindsym $mod+5     workspace number 5
+bindsym $mod+6     workspace number 6
+bindsym $mod+7     workspace number 7
+bindsym $mod+8     workspace number 8
+bindsym $mod+9     workspace number 9
+bindsym $mod+0     workspace number 10
+bindsym $mod+minus workspace number 11
+bindsym $mod+equal workspace number 12
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
+
+# move focused container to workspace
+bindsym $mod+Shift+exclam      move container to workspace number 1
+bindsym $mod+Shift+at          move container to workspace number 2
+bindsym $mod+Shift+numbersign  move container to workspace number 3
+bindsym $mod+Shift+dollar      move container to workspace number 4
+bindsym $mod+Shift+percent     move container to workspace number 5
+bindsym $mod+Shift+asciicircum move container to workspace number 6
+bindsym $mod+Shift+ampersand   move container to workspace number 7
+bindsym $mod+Shift+asterisk    move container to workspace number 8
+bindsym $mod+Shift+parenleft   move container to workspace number 9
+bindsym $mod+Shift+parenright  move container to workspace number 10
+bindsym $mod+Shift+underscore  move container to workspace number 11
+bindsym $mod+Shift+plus        move container to workspace number 12
+bindsym $mod+Shift+p           move container to workspace prev
+bindsym $mod+Shift+n           move container to workspace next
+
+# move workspace to another monitor
+bindsym $mod+$alt+k move workspace to output up
+bindsym $mod+$alt+j move workspace to output down
+bindsym $mod+$alt+h move workspace to output left
+bindsym $mod+$alt+l move workspace to output left
+
+# use https://github.com/edne/i3-workspace-handler
+bindsym $mod+grave exec i3-msg workspace $(lsws | dmenu -p "→")  # grave = backtick
+bindsym $mod+Shift+grave exec i3-msg move container to workspace $(lsws | dmenu -p "|→")
+bindsym $mod+u workspace back_and_forth
+
+# scratchpad
+#bindsym $mod+Shift+minus move scratchpad
+#bindsym $mod+minus scratchpad show
+bindsym $mod+Down move scratchpad
+bindsym $mod+Up   scratchpad show
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
+bar {
+        status_command i3status
+        colors {
+                separator  #00FFFF
+                background #00000
+                statusline #FF88FF
+
+                #<colorclass>      <border> <background> <text>
+                focused_workspace  #FF0000  #330000      #FFFFFF
+                active_workspace   #CC0000  #110000      #CCCCCC
+                inactive_workspace #000000  #444444      #FFFFFF
+                urgent_workspace   #FF0000  #9B4F96      #FF0000
+        }
+}
+
+# volume
+#bindsym $mod+q exec "alacritty -e alsamixer"
+bindsym $mod+q exec "pavucontrol"
+bindsym $mod+z exec "amixer sset Master,0 1-"
+bindsym $mod+x exec "amixer sset Master,0 1+"
+bindsym $alt+bracketleft exec "amixer sset Master,0 1-"
+bindsym $alt+bracketright exec "amixer sset Master,0 1+"
+
+# redshift
+bindsym $mod+Shift+z exec "redChange -250"
+bindsym $mod+Shift+x exec "redChange 250"
+
+# ranger
+bindsym $mod+m exec "alacritty -e ranger"
+bindsym $mod+t exec "thunar"
+
+# locale 
+bindsym $mod+v exec --no-startup-id /home/toph/bin/switch_locale
+
+# screen lock
+bindsym $mod+F1 exec "i3lock -c 000000"
+
+# suspend
+bindsym $mod+F12 exec "rfkill block bluetooth; i3lock -c 000000 & systemctl suspend; rfkill unblock bluetooth"
+
+# force floating mode for certain windows
+for_window [class="Xfce4-notifyd" instance="xfce4-notifyd"] floating enable
+for_window [class="ROOT" instance="Browser"] floating enable
+for_window [class="zoom" instance="zoom"] floating enable
+for_window [class="org-codehaus-groovy-tools-GroovyStarter" instance="org-codehaus-groovy-tools-GroovyStarter"] floating enable
+for_window [class="Matplotlib"] floating enable
+
+# colorscheme
+set $bg     #004400
+set $bg2    #0033aa
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #00cc77
+set $tx     #040404
+set $ia     #DDDDDD
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+# set some nice colors      border     background  text
+client.focused              $ac        $ac         $tx
+client.unfocused            $bg        $bg         $ia
+client.focused_inactive     $bg        $bg2        $ia
+client.urgent               $rd        $rd         $tx
+
+# startup
+exec --no-startup-id xrdb -merge ~/.Xdefaults
+exec --no-startup-id volumeicon
+exec --no-startup-id synclient MaxTapTime=0
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id pulseaudio
+exec --no-startup-id nm-applet
+exec --no-startup-id blueberry-tray

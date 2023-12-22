@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo umount /arc
+xrandr_single
+xmodmap /home/`whoami`/.Xmodmap

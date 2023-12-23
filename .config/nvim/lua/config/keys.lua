@@ -1,18 +1,39 @@
+--[[ map '<Leader>'..key to a command
+opts = {
+  modes: modes for these keybindings
+  lazy:  if true, return table for lazy.nvim spec
+  keys:  the keybindings table { key -> command }
+}
+--]]
+function leader_commands(opts)
+  local modes = opts.modes or {'n'}
+  local lazy  = opts.lazy  or false
+  local lazy_keys = {}
+  for key, bind in pairs(opts.keys) do
+    local _key  = [[<Leader>]]..key
+    local _bind = [[<Cmd>]]..bind..[[<CR>]]
+    if lazy then
+      table.insert(lazy_keys, { _key, _bind, mode=modes })
+    else
+      vim.keymap.set(modes, _key, _bind)
+    end
+  end
+  if lazy_keys then return lazy_keys end
+end
+
 -- leader keybindings
 vim.g.mapleader = [[ ]]
-function leader_commands(modes, bind_table)
-  for key, bind in pairs(bind_table) do
-    vim.keymap.set(modes, [[<Leader>]]..key, [[<Cmd>]]..bind..[[<CR>]])
-  end
-end
-leader_commands({'n', 'v'}, {
-  w = [[w]],
-  q = [[q]],
-  x = [[x]],
-  X = [[xa]],
-  Q = [[q!]],
-  n = [[nohl]],
-  e = [[e]],
+leader_commands({
+  modes = {'n', 'v'},
+  keys = {
+    w = [[w]],
+    q = [[q]],
+    x = [[x]],
+    X = [[xa]],
+    Q = [[q!]],
+    n = [[nohl]],
+    e = [[e]],
+  },
 })
 
 -- page up, down, left, right

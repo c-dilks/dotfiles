@@ -18,7 +18,7 @@ function leader_commands(opts)
       vim.keymap.set(modes, _key, _bind)
     end
   end
-  if lazy_keys then return lazy_keys end
+  if lazy then return lazy_keys end
 end
 
 -- leader keybindings

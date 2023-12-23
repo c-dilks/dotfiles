@@ -13,7 +13,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ```
 - copy my `.config/nvim`
 - install `xclip` (if not installed)
-- open `neovim`, run `:PlugInstall`
+- run `nvim`
 - run `:checkhealth` to see if there are any issues
 
 # Latex

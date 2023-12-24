@@ -1,5 +1,6 @@
 return {
   'c-dilks/notator.nvim',
+  branch = 'main',
   lazy = false,
   opts = {
     tag_table = {

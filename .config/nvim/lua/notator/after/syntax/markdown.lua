@@ -1,11 +1,12 @@
-vim.cmd([[hi hi_PRIORITY cterm=bold ctermfg=yellow     guifg=yellow]])
-vim.cmd([[hi hi_TODO     cterm=bold ctermfg=red        guifg=red]])
-vim.cmd([[hi hi_RUNNING  cterm=bold ctermfg=cyan       guifg=cyan]])
-vim.cmd([[hi hi_WAITING  cterm=bold ctermfg=magenta    guifg=magenta]])
-vim.cmd([[hi hi_DONE     cterm=bold ctermfg=lightgreen guifg=lightgreen]])
-
-vim.cmd([[syn keyword hi_PRIORITY PRIORITY]])
-vim.cmd([[syn keyword hi_TODO     TODO]])
-vim.cmd([[syn keyword hi_RUNNING  RUNNING]])
-vim.cmd([[syn keyword hi_WAITING  WAITING]])
-vim.cmd([[syn keyword hi_DONE     DONE]])
+for _, notation in ipairs(require('notator').config.notation_table) do
+  vim.cmd([[highlight]]
+  .. [[ hi_]]      .. notation.name
+  .. [[ cterm=]]   .. notation.style
+  .. [[ ctermfg=]] .. notation.color
+  .. [[ guifg=]]   .. notation.color
+  )
+  vim.cmd([[syntax keyword]]
+  .. [[ hi_]] .. notation.name
+  .. [[ ]]    .. notation.name
+  )
+end

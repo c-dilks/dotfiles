@@ -141,6 +141,9 @@ man() {
 # plugins and custom settings
 #######################################################################
 
+# ssh-agent
+[ -f ${HOME}/.sshenv ] && source ${HOME}/.sshenv
+
 # syntax highlighting
 [ -f ${HOME}/builds/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ${HOME}/builds/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

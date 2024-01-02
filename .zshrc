@@ -178,6 +178,10 @@ fi
 # git-subrepo
 [ -d ${HOME}/builds/git-subrepo ] && source ${HOME}/builds/git-subrepo/.rc
 
+# python shims
+if type virtualenvwrapper.sh > /dev/null; then
+  source virtualenvwrapper.sh
+fi
 
 # ifarm modules
 #######################################################################

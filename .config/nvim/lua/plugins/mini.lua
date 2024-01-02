@@ -68,12 +68,6 @@ return {
     config = true,
   },
   {
-    -- start screen
-    'echasnovski/mini.starter',
-    lazy = false,
-    config = true,
-  },
-  {
     -- status line
     'echasnovski/mini.statusline',
     lazy = false,

@@ -7,7 +7,7 @@ opts = {
 --]]
 function leader_commands(opts)
   local modes = opts.modes or {'n'}
-  local lazy  = opts.lazy  or false
+  local lazy  = opts.lazy_syntax  or false
   local lazy_keys = {}
   for key, bind in pairs(opts.keys) do
     local _key  = [[<Leader>]]..key

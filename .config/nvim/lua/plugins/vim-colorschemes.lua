@@ -4,6 +4,6 @@ return {
   lazy     = false,
   priority = 1000,
   config   = function()
-    vim.cmd([[colorscheme adventurous]])
+    vim.cmd([[colorscheme lizard256]])
   end,
 }

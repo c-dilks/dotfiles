@@ -4,6 +4,7 @@ return {
     build = ':TSUpdate',
     lazy = false,
     config = function()
+      require('nvim-treesitter.install').compilers = {'gcc'} -- since ifarm `cc` is ancient
       require('nvim-treesitter.configs').setup({
         sync_install = false,
         auto_install = true,

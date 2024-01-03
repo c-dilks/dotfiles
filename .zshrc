@@ -138,6 +138,19 @@ man() {
     man "$@"
 }
 
+# add ssh keys
+ssha() {
+  if [[ "`hostname`" =~ "ifarm" ]]; then
+    echo "kill current ssh-agent..."
+    ssh-agent -k
+    echo "kill any other ssh-agent processes..."
+    pkill -U $USER ssh-agent
+    echo "restarting a new ssh-agent..."
+    eval "$(ssh-agent -s)"
+  fi
+  ssh-add -t 8h $(ls $HOME/.ssh/*.pub | sed 's;\.pub$;;')
+}
+
 # plugins and custom settings
 #######################################################################
 

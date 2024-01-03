@@ -10,10 +10,16 @@ return {
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = true,
+          disable = {
+            'markdown', -- since spellchecking is too agressive when tree-sitter is used
+          },
         },
         indent = {
           enable = false,
-          disable = {'c', 'cpp'},
+          disable = {
+            'c',
+            'cpp',
+          },
         },
       })
     end,

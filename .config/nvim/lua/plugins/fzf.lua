@@ -15,7 +15,7 @@ return {
         ['ctrl-v'] = 'vsplit',
       })
       vim.keymap.set({'n'}, [[q/]], [[<Cmd>History/<CR>]])
-      vim.keymap.set({'n'}, [[q:]], [[<Cmd>History/<CR>]])
+      vim.keymap.set({'n'}, [[q:]], [[<Cmd>History:<CR>]])
       leader_commands({
         modes = {'n'},
         keys = {

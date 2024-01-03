@@ -1,5 +1,6 @@
 return {
   'backdround/improved-search.nvim',
+  enabled = false, -- DISABLED, since search patterns aren't stored in history
   keys = {
     { 'n', function() require('improved-search').stable_next()         end, mode={'n','x','o'} },
     { 'N', function() require('improved-search').stable_previous()     end, mode={'n','x','o'} },

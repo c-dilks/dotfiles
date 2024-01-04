@@ -1,7 +1,7 @@
 return {
   {
     'junegunn/fzf',
-    run = './install --all',
+    build = './install --all',
     lazy = false,
   },
   {

@@ -53,7 +53,7 @@ vim.keymap.set('', [['']], [[<C-W><C-W>]])
 vim.keymap.set('', [[<Leader><Leader>]], [[<C-w>]])
 
 -- reload syntax
-vim.keymap.set({'n', 'v'}, [[<F12>]], [[:syntax sync fromstart<CR>]])
+vim.keymap.set({'n', 'v'}, [[<F12>]], [[<Cmd>syntax sync fromstart<CR>]])
 
 -- yank to system clipboard upon mouse selection
 vim.keymap.set('v', [[<LeftRelease>]], [["*ygv]])

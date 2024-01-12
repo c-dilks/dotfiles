@@ -56,12 +56,6 @@ return {
     end
   },
   {
-    -- better jumping with `f`, `F`, `t`, `T`
-    'echasnovski/mini.jump',
-    lazy = false,
-    config = true,
-  },
-  {
     -- split and join arguments with `gS`
     'echasnovski/mini.splitjoin',
     lazy = false,

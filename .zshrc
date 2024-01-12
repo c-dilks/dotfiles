@@ -84,6 +84,7 @@ alias root='root -l'
 alias rootq='root -b -q'
 alias tmuxa='tmux a -t'
 alias tmuxs='tmux new -s'
+alias tmuxl='tmux ls'
 
 # neovim
 alias vim='nvim'

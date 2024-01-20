@@ -47,6 +47,10 @@ for key, bind in pairs({
   vim.keymap.set({'n'},     [[<Esc>]]..key,      bind)
 end
 
+-- jump to beginning or end of line in insert mode (also works for normal mode)
+vim.keymap.set({'i','n'}, [[<M-a>]], [[<Esc>A]])
+vim.keymap.set({'i','n'}, [[<M-i>]], [[<Esc>I]])
+
 -- window switching
 vim.keymap.set('', [[']],  [[<C-W>]])
 vim.keymap.set('', [['']], [[<C-W><C-W>]])

@@ -1,9 +1,8 @@
 #!/bin/bash
+set -e
 echo """
 === PACMAN ====================================="""
 sudo pacman -Syu
 echo """
 === AUR ========================================"""
 yay -Syu
-# sudo apt update && sudo apt upgrade
-# sudo snap refresh

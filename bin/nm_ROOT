@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+  echo "USAGE $0 [search symbol]" >&2
+  exit 2
+fi
+for file in $(root-config --libdir)/*.so; do
+  echo "LIBRARY: $file"
+  nm $file | grep $1
+  echo ""
+  echo ""
+  echo ""
+done

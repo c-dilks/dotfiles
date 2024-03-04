@@ -15,12 +15,18 @@ monitor1=DP-1-2-2
 monitor2=DP-1-2-1
 
 case $1 in
-  on)
+  three)
     echo "setup 3 monitors"
     xrandr \
       --output $monitorLaptop --mode 1920x1200 --pos 0x400    \
       --output $monitor1      --mode 2560x1440 --pos 1920x400 \
       --output $monitor2      --mode 2560x1440 --pos 4480x0   --rotation left
+    ;;
+  two)
+    echo "setup 2 monitors"
+    xrandr \
+      --output $monitorLaptop --mode 1920x1200 --pos 0x400    \
+      --output $monitor2      --mode 2560x1440 --pos 1920x400
     ;;
   off)
     echo "setup 1 monitor"
@@ -29,4 +35,7 @@ case $1 in
       --output $monitor1      --off  \
       --output $monitor2      --off
     ;;
+  *)
+    echo "ERROR: unknown argument '$1'" >&2
+    exit 1
 esac

@@ -19,8 +19,8 @@ case $1 in
     echo "setup 3 monitors"
     xrandr \
       --output $monitorLaptop --mode 1920x1200 --pos 0x400    \
-      --output $monitor1      --mode 2560x1440 --pos 1920x400 \
-      --output $monitor2      --mode 2560x1440 --pos 4480x0   --rotation left
+      --output $monitor2      --mode 2560x1440 --pos 1920x400 \
+      --output $monitor1      --mode 2560x1440 --pos 4480x0   --rotation left
     ;;
   two)
     echo "setup 2 monitors"

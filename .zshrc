@@ -25,7 +25,7 @@ zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 
 # use .ssh/config for auto-complete (rather than known_hosts)
 if [ -r $HOME/.ssh/config ]; then
-  zstyle ':completion::complete:ssh*:*:hosts' command 'getent hosts; sed -n "s/^Host[=[:blank:]]*/ignored /p" ~/.ssh/config'
+  zstyle ':completion::complete:(ssh|scp|sftp|rsync):*:hosts' command 'getent hosts; sed -n "s/^Host[=[:blank:]]*/ignored /p" ~/.ssh/config'
 fi
 
 # keybindings

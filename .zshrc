@@ -23,6 +23,11 @@ zstyle ':completion:*' menu select
 unsetopt complete_aliases
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 
+# use .ssh/config for auto-complete (rather than known_hosts)
+if [ -r $HOME/.ssh/config ]; then
+  zstyle ':completion::complete:ssh*:*:hosts' command 'getent hosts; sed -n "s/^Host[=[:blank:]]*/ignored /p" ~/.ssh/config'
+fi
+
 # keybindings
 bindkey -v
 bindkey '^r' history-incremental-search-backward

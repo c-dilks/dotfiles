@@ -2,6 +2,14 @@
 cursor = "#00ff00"
 text = "CellBackground"
 
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "#111111"
+foreground = "#ff9966"
+bright_foreground = "#ffffff"
+
 [colors.normal]
 black = "#777777"
 blue = "#7777ff"
@@ -12,9 +20,15 @@ red = "#ff0000"
 white = "#ffffff"
 yellow = "#ffff00"
 
-[colors.primary]
-background = "#111111"
-foreground = "#ff9966"
+[colors.bright]
+black = "#777777"
+blue = "#7777ff"
+cyan = "#00ffff"
+green = "#00ff00"
+magenta = "#ff00ff"
+red = "#ff0000"
+white = "#ffffff"
+yellow = "#ffff00"
 
 [colors.vi_mode_cursor]
 cursor = "#ff88ff"

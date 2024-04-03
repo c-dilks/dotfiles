@@ -163,6 +163,9 @@ ssha() {
 # plugins and custom settings
 #######################################################################
 
+# cmake settings
+export CMAKE_GENERATOR=Ninja
+
 # ssh-agent
 [ -f ${HOME}/.sshenv ] && source ${HOME}/.sshenv
 

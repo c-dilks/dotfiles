@@ -17,10 +17,14 @@ monitor2=DP-1-2-1
 case $1 in
   three)
     echo "setup 3 monitors"
+    # xrandr \
+    #   --output $monitorLaptop --mode 1920x1200 --pos 0x400    \
+    #   --output $monitor2      --mode 2560x1440 --pos 1920x400 \
+    #   --output $monitor1      --mode 2560x1440 --pos 4480x0   --rotation left
     xrandr \
-      --output $monitorLaptop --mode 1920x1200 --pos 0x400    \
-      --output $monitor2      --mode 2560x1440 --pos 1920x400 \
-      --output $monitor1      --mode 2560x1440 --pos 4480x0   --rotation left
+      --output $monitorLaptop --mode 1920x1200 --pos 4000x400 \
+      --output $monitor2      --mode 2560x1440 --pos 1440x400 \
+      --output $monitor1      --mode 2560x1440 --pos 0x0 --rotation left
     ;;
   two)
     echo "setup 2 monitors"
@@ -28,7 +32,7 @@ case $1 in
       --output $monitorLaptop --mode 1920x1200 --pos 0x400    \
       --output $monitor2      --mode 2560x1440 --pos 1920x400
     ;;
-  off)
+  one|off)
     echo "setup 1 monitor"
     xrandr \
       --output $monitorLaptop --auto --pos 0x0 \

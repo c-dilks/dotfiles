@@ -30,7 +30,7 @@ leader_commands({
     q = [[q]],
     x = [[x]],
     X = [[xa]],
-    Q = [[q!]],
+    Q = [[qa]],
     n = [[nohl]],
     e = [[e]],
   },

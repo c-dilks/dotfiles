@@ -52,6 +52,9 @@ vim.keymap.set({'i','n'}, [[<M-a>]], [[<Esc>A]])
 vim.keymap.set({'i','n'}, [[<M-i>]], [[<Esc>I]])
 
 -- window switching
+for idx, key in ipairs({'h', 'j', 'k', 'l'}) do
+  vim.keymap.set('', [[<C-]]..key..[[>]], [[<C-w>]]..key)
+end
 vim.keymap.set('', [[']],  [[<C-W>]])
 vim.keymap.set('', [['']], [[<C-W><C-W>]])
 vim.keymap.set('', [[<Leader><Leader>]], [[<C-w>]])

@@ -67,7 +67,6 @@ path+=(
   .
   $HOME/bin
   $HOME/builds/bin
-  /snap/bin
 )
 
 # java classpath
@@ -118,6 +117,7 @@ fi
 alias ttt="cd $HOME/j/dm/clas12-timeline"
 alias vvv="cd $HOME/j/clas12-validation"
 alias ccc="cd $HOME/j/coatjava"
+alias iii="cd $HOME/j/iguana"
 
 
 # functions

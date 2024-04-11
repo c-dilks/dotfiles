@@ -198,7 +198,7 @@ if [ -d "$RBENV_ROOT" ]; then
 fi
 
 # rubyroot
-[ -d ${HOME}/builds/RubyROOT ] && rubylib+=${HOME}/builds/RubyROOT/install/lib/ruby
+[ -d ${HOME}/builds/RubyROOT-install ] && rubylib+=${HOME}/builds/RubyROOT-install/lib/ruby
 
 # git-subrepo
 [ -d ${HOME}/builds/git-subrepo ] && source ${HOME}/builds/git-subrepo/.rc

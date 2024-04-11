@@ -11,7 +11,8 @@ else
 fi
 
 # use ripgrep as backend
-export FZF_DEFAULT_COMMAND='[ -f compile_commands.json ] && rg --files --no-ignore || rg --files --no-ignore-parent'
+### if in a meson build directory (which has compile_commands.json), do not use its `.gitignore`
+export FZF_DEFAULT_COMMAND='[ -f compile_commands.json -a -f .gitignore ] && rg --files --no-ignore || rg --files --no-ignore-parent'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Auto-completion

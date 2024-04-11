@@ -1,0 +1,19 @@
+#!/bin/bash
+
+git gc
+
+orphans=($(git branch -vv | grep '\[origin/.*: gone\]' | awk '{print $1}'))
+
+echo """
+=============================================
+The following local branches are orphans;
+to remove them, use the option --delete-orphans
+
+${orphans[@]}
+============================================="""
+
+if [ "$1" = "--delete-orphans" ]; then
+  for orphan in ${orphans[@]}; do
+    git branch --delete --force $orphan
+  done
+fi

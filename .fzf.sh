@@ -11,7 +11,7 @@ else
 fi
 
 # use ripgrep as backend
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+export FZF_DEFAULT_COMMAND='[ -f compile_commands.json ] && rg --files --no-ignore || rg --files --no-ignore-parent'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Auto-completion

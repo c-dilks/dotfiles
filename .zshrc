@@ -164,7 +164,9 @@ ssha() {
 #######################################################################
 
 # cmake settings
-export CMAKE_GENERATOR=Ninja
+if type ninja > /dev/null; then
+  export CMAKE_GENERATOR=Ninja
+fi
 
 # ssh-agent
 [ -f ${HOME}/.sshenv ] && source ${HOME}/.sshenv

@@ -210,18 +210,9 @@ if type virtualenvwrapper.sh > /dev/null; then
   source virtualenvwrapper.sh
 fi
 
-# ifarm modules
-#######################################################################
-
-if  [[ "`hostname`" =~ "ifarm" ]]; then
-  source /group/clas12/packages/setup.zsh
-  module purge
-  module load clas12/dev
-  module switch git/2.31.1
-fi
-
 # environments
-# NOTE: they will override ifarm modules, if they exist
+# NOTE: see ~/.login for any `module` loads; the settings below
+#       may override them!!!
 #######################################################################
 
 # ROOT

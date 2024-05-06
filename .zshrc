@@ -160,6 +160,11 @@ ssha() {
   ssh-add -t 8h $(ls $HOME/.ssh/*.pub | sed 's;\.pub$;;')
 }
 
+# kill open ssh control masters # FIXME: there is likely a cleaner way, but this works...
+sshk() {
+  rm -vi $HOME/.ssh/cm/*
+}
+
 # plugins and custom settings
 #######################################################################
 

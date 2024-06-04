@@ -13,6 +13,9 @@ floating_modifier $mod+$alt
 # start a terminal
 bindsym $mod+Return exec alacritty
 bindsym $alt+Tab exec alacritty
+bindsym $mod+Tab exec alacritty
+bindsym $mod+q resize grow width 300 px
+bindsym $mod+Shift+q resize shrink width 300 px
 
 # kill focused window
 bindsym $mod+b kill
@@ -178,7 +181,7 @@ bar {
 
 # volume
 #bindsym $mod+q exec "alacritty -e alsamixer"
-bindsym $mod+q exec "pavucontrol"
+# bindsym $mod+q exec "pavucontrol"
 bindsym $mod+z exec "amixer sset Master,0 1-"
 bindsym $mod+x exec "amixer sset Master,0 1+"
 bindsym $alt+bracketleft exec "amixer sset Master,0 1-"
@@ -196,7 +199,7 @@ bindsym $mod+t exec "thunar"
 bindsym $mod+v exec --no-startup-id /home/toph/bin/switch_locale
 
 # screen lock
-bindsym $mod+F1 exec "i3lock -c 000000"
+bindsym $mod+F1 exec "i3lock -c 330033 -f"
 
 # suspend
 bindsym $mod+F12 exec "rfkill block bluetooth; i3lock -c 000000 & systemctl suspend; rfkill unblock bluetooth"
@@ -227,11 +230,11 @@ client.focused_inactive     $bg        $bg2        $ia
 client.urgent               $rd        $rd         $tx
 
 # startup
-exec --no-startup-id xrdb -merge ~/.Xdefaults
+# exec --no-startup-id xrdb -merge ~/.Xdefaults
 exec --no-startup-id volumeicon
 exec --no-startup-id synclient MaxTapTime=0
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id pulseaudio
 exec --no-startup-id nm-applet
-exec --no-startup-id blueberry-tray
+# exec --no-startup-id blueberry-tray
 exec --no-startup-id ~/bin/ssh_agent_start

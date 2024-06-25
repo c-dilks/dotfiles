@@ -215,6 +215,24 @@ if type virtualenvwrapper.sh > /dev/null; then
   source virtualenvwrapper.sh
 fi
 
+# module environments
+#######################################################################
+if [[ "`hostname`" =~ "ifarm" ]]; then
+  ## set modules environment
+  if grep -q -i 'CentOS Linux release 7' /etc/redhat-release; then
+    echo -e '\e[1;31m[+] sourcing clas12 environment for CentOS 7\e[0m'
+    source /group/clas12/packages/setup.zsh
+    module purge
+  else
+    echo -e '\e[1;35m[+] setting clas12 modules environment for Alma 9\e[0m'
+    module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
+    # module use /cvmfs/oasis.opensciencegrid.org/jlab/hallb/clas12/sw/modulefiles
+  fi
+  module load clas12
+  module load workflow
+  module load pythia/8.310
+fi
+
 # environments
 # NOTE: see ~/.login for any `module` loads; the settings below
 #       may override them!!!

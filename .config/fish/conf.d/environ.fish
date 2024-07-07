@@ -26,6 +26,9 @@ if type ninja &> /dev/null
   set -x CMAKE_GENERATOR Ninja
 end
 
+# ssh-agent
+test -f ~/.sshenv.fish && source ~/.sshenv.fish
+
 ##################################################################################
 
 # ROOT

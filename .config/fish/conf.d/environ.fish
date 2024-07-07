@@ -35,6 +35,7 @@ if command -sq ruby && command -sq gem
 end
 set -x RBENV_ROOT ~/.rbenv
 if test -d $RBENV_ROOT
+  set -xp PATH $RBENV_ROOT/bin
   eval "$(rbenv init - fish)" # use rbenv ruby shim
   set -x PYTHON (which python) # for pycall gem
 end

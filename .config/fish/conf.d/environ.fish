@@ -18,16 +18,43 @@ set -xp CLASSPATH . # java class path
 
 ##################################################################################
 
-# ripgrep
-set -x RIPGREP_CONFIG_PATH ~/.ripgrep
-
 # cmake
-if type ninja &> /dev/null
+if command -sq ninja
   set -x CMAKE_GENERATOR Ninja
 end
 
+# python shims ### FIXME use virtualfish, or 'abbr workhere 'source .venv/bin/activate.fish'
+# if type virtualenvwrapper.sh > /dev/null; then
+#   source virtualenvwrapper.sh
+# fi
+
+# ruby shims
+if command -sq ruby && command -sq gem
+  # use local ruby gems
+  set -xp PATH (ruby -r rubygems -e 'puts Gem.user_dir')/bin
+end
+set -x RBENV_ROOT ~/.rbenv
+if test -d $RBENV_ROOT
+  eval "$(rbenv init - fish)" # use rbenv ruby shim
+  set -x PYTHON (which python) # for pycall gem
+end
+
+##################################################################################
+
+# ripgrep
+if test -f ~/.ripgrep
+  set -x RIPGREP_CONFIG_PATH ~/.ripgrep
+end
+
+# fzf
+if command -sq fzf
+  fzf --fish | source
+end
+
 # ssh-agent
-test -f ~/.sshenv.fish && source ~/.sshenv.fish
+if test -f ~/.sshenv.fish
+  source ~/.sshenv.fish
+end
 
 ##################################################################################
 
@@ -36,6 +63,11 @@ if test -d ~/builds/root
   cd ~/builds/root
   source bin/thisroot.fish
   prevd
+end
+
+# RubyROOT
+if test -d ~/builds/RubyROOT-install
+  set -xp RUBYLIB ~/builds/RubyROOT-install/lib/ruby
 end
 
 # clas12root
@@ -59,6 +91,3 @@ if test -d ~/j/rcdb
   set -xp PYTHONPATH $RCDB_HOME/python
 end
 test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
-
-# RubyROOT
-test -d ~/builds/RubyROOT-install && set -xp RUBYLIB ~/builds/RubyROOT-install/lib/ruby

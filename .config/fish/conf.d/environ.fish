@@ -50,7 +50,8 @@ end
 # fzf
 if command -sq fzf
   if command -sq rg
-    set -x FZF_CTRL_T_COMMAND '[ -f compile_commands.json -a -f .gitignore ] && rg --files --no-ignore || rg --files --no-ignore-parent'
+    set -x FZF_DEFAULT_COMMAND '[ -f compile_commands.json -a -f .gitignore ] && rg --files --no-ignore || rg --files --no-ignore-parent'
+    set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
   end
   fzf --fish | source
 end

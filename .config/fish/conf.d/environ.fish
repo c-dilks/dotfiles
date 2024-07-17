@@ -49,6 +49,9 @@ end
 
 # fzf
 if command -sq fzf
+  if command -sq rg
+    set -x FZF_CTRL_T_COMMAND '[ -f compile_commands.json -a -f .gitignore ] && rg --files --no-ignore || rg --files --no-ignore-parent'
+  end
   fzf --fish | source
 end
 

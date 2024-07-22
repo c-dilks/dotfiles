@@ -12,6 +12,9 @@ set -gx LESS_TERMCAP_so \e'[38;5;246m'
 set -gx LESS_TERMCAP_ue \e'[0m'
 set -gx LESS_TERMCAP_us \e'[04;38;5;146m'
 
+# ls coloring
+set -gx LS_COLORS 'di=01;33:ln=01;32:mi=01;30:ex=01;36'
+
 # paths
 set -xp PATH . ~/bin ~/builds/bin
 set -xp CLASSPATH . # java class path

@@ -9,4 +9,7 @@ eval `ssh-agent -s`
 echo "export `env|grep SSH_AGENT_PID`" > $HOME/.sshenv
 echo "export `env|grep SSH_AUTH_SOCK`" >> $HOME/.sshenv
 
+echo "set -gx `env|grep SSH_AGENT_PID|sed 's;=; ;'`" > $HOME/.sshenv.fish
+echo "set -gx `env|grep SSH_AUTH_SOCK|sed 's;=; ;'`" >> $HOME/.sshenv.fish
+
 chmod 600 $HOME/.sshenv

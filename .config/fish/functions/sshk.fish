@@ -1,4 +1,3 @@
-function sshk --wraps='rm -vi ~/.ssh/cm/*' --description 'alias sshk rm -vi ~/.ssh/cm/*'
-  rm -vi ~/.ssh/cm/* $argv
-        
+function sshk --description 'remove broken control master sockets'
+  rm -v ~/.ssh/cm/*.sock
 end

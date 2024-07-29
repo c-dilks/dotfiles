@@ -3,6 +3,9 @@ abbr mv 'mv -v'
 abbr rm 'rm -v'
 abbr open 'xdg-open'
 
+# bass
+abbr bsource 'bass source'
+
 # ROOT
 abbr root 'root -l'
 abbr rootq 'root -l -b -q'

@@ -17,6 +17,7 @@ return {
       vim.keymap.set({'n', 'v'}, [[Ls]], [[<Cmd>LspStop<CR>]])
       vim.keymap.set({'n', 'v'}, [[Lq]], [[<Cmd>LspStart<CR>]])
       vim.keymap.set({'n', 'v'}, [[Li]], [[<Cmd>LspInfo<CR>]])
+      vim.keymap.set({'n', 'v'}, [[Lf]], vim.lsp.buf.code_action)
 
       -- mason setup
       local lsp_zero        = require('lsp-zero')

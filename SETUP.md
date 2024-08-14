@@ -50,6 +50,8 @@ sudo tlmgr update --all
     - `rbenv` shims:
         - run `dotfiles/builds/build_ruby.sh` from `$HOME`; be sure to set/update `$VERSION` in the script
         - run `bundle install` from top-level `dotfiles` directory (where `Gemfile` is)
+          - alternatively, for each gem `$GEM`, call `gem install $GEM`; use the `--user-install` option
+            if you want it in your `.local/share/gem` directory (rather than at the system level)
         - copy my `.pryrc` to `~/`
 
 # Slurm

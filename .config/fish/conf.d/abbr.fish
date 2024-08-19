@@ -22,6 +22,9 @@ abbr v 'nvim'
 abbr vd 'nvim -d'
 abbr ovim 'vim'
 
+# meson
+abbr msw 'meson setup --wipe'
+
 # clusters
 abbr sq "squeue -u $USER"
 abbr slurmq "slurmJobs -u $USER"

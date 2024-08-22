@@ -231,6 +231,9 @@ if [[ "`hostname`" =~ "ifarm" ]]; then
   module load clas12
   module load workflow
   module load pythia/8.310
+
+  # handle maven's need for `exec` /tmp
+  export MAVEN_OPTS=-Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
 fi
 
 # environments

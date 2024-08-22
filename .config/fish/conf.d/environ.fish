@@ -99,3 +99,10 @@ if test -d ~/j/rcdb
   set -xp PYTHONPATH $RCDB_HOME/python
 end
 test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
+
+##################################################################################
+
+# ifarm stuff
+if string match --regex "ifarm" (hostname)
+  set -x MAVEN_OPTIONS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
+end

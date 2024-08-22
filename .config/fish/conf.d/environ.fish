@@ -104,5 +104,5 @@ test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_ja
 
 # ifarm stuff
 if string match --regex "ifarm" (hostname)
-  set -x MAVEN_OPTIONS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
+  set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
 end

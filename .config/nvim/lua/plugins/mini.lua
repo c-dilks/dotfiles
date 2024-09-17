@@ -9,7 +9,22 @@ return {
     -- align text interactively with `ga`
     'echasnovski/mini.align',
     lazy = false,
-    config = true,
+    config = function()
+      local P = require('mini.align')
+      P.setup({
+        mappings = {
+          start_with_preview = [[ga]],
+          start = [[gA]],
+        },
+        options = {
+          justify_side = 'left',
+          merge_delimiter = ' ',
+        },
+        steps = {
+          pre_justify = { P.gen_step.trim() },
+        }
+      })
+    end
   },
   {
     -- animation

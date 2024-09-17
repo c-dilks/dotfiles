@@ -32,6 +32,7 @@ abbr jcacheq "jcache pendingRequest -u $USER"
 
 # shortcut directories
 abbr ttt "cd ~/j/dm/clas12-timeline"
+abbr qqq "cd ~/j/dm/clas12-qadb"
 abbr vvv "cd ~/j/clas12-validation"
 abbr ccc "cd ~/j/coatjava"
 abbr iii "cd ~/j/iguana"

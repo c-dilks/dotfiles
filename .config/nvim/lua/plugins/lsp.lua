@@ -1,12 +1,14 @@
 return {
   {
     'VonHeikemen/lsp-zero.nvim',
+    enabled = true,
     dependencies = {
       'neovim/nvim-lspconfig',
     },
   },
   {
     'williamboman/mason.nvim',
+    enabled = true,
     lazy = false,
     dependencies = {
       'williamboman/mason-lspconfig.nvim',

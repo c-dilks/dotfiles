@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+set -l home_dilks /home/dilks
+
 # main
 set -x EDITOR nvim
 
@@ -16,7 +18,7 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;146m'
 set -gx LS_COLORS 'di=01;33:ln=01;32:mi=01;30:ex=01;36'
 
 # paths
-set -xp PATH . ~/bin ~/builds/bin
+set -xp PATH . $home_dilks/bin $home_dilks/builds/bin
 set -xp CLASSPATH . # java class path
 
 ##################################################################################
@@ -36,7 +38,7 @@ if command -sq ruby && command -sq gem
   # use local ruby gems
   set -xp PATH (ruby -r rubygems -e 'puts Gem.user_dir')/bin
 end
-set -x RBENV_ROOT ~/.rbenv
+set -x RBENV_ROOT $home_dilks/.rbenv
 if test -d $RBENV_ROOT
   set -xp PATH $RBENV_ROOT/bin
   eval "$(rbenv init - fish)" # use rbenv ruby shim
@@ -46,8 +48,8 @@ end
 ##################################################################################
 
 # ripgrep
-if test -f ~/.ripgrep
-  set -x RIPGREP_CONFIG_PATH ~/.ripgrep
+if test -f $home_dilks/.ripgrep
+  set -x RIPGREP_CONFIG_PATH $home_dilks/.ripgrep
 end
 
 # fzf
@@ -60,41 +62,41 @@ if command -sq fzf
 end
 
 # ssh-agent
-if test -f ~/.sshenv.fish
-  source ~/.sshenv.fish
+if test -f $home_dilks/.sshenv.fish
+  source $home_dilks/.sshenv.fish
 end
 
 ##################################################################################
 
 # ROOT
-if test -d ~/builds/root
-  cd ~/builds/root
+if test -d $home_dilks/builds/root
+  cd $home_dilks/builds/root
   source bin/thisroot.fish
   prevd
 end
 
 # RubyROOT
-if test -d ~/builds/RubyROOT-install
-  set -xp RUBYLIB ~/builds/RubyROOT-install/lib/ruby
+if test -d $home_dilks/builds/RubyROOT-install
+  set -xp RUBYLIB $home_dilks/builds/RubyROOT-install/lib/ruby
 end
 
 # clas12root
-if test -d ~/j/clas12root
-  set -x CLAS12ROOT ~/j/clas12root
+if test -d $home_dilks/j/clas12root
+  set -x CLAS12ROOT $home_dilks/j/clas12root
   set -xp PATH $CLAS12ROOT/bin
   set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
 end
 
 # coatjava
-if test -d ~/j/coatjava/coatjava
-  set -x COATJAVA ~/j/coatjava/coatjava
+if test -d $home_dilks/j/coatjava/coatjava
+  set -x COATJAVA $home_dilks/j/coatjava/coatjava
   set -xp PATH $COATJAVA/bin
 end
 test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
 
 # rcdb
-if test -d ~/j/rcdb
-  set -x RCDB_HOME ~/j/rcdb
+if test -d $home_dilks/j/rcdb
+  set -x RCDB_HOME $home_dilks/j/rcdb
   set -xp PATH $RCDB_HOME $RCDB_HOME/bin
   set -xp PYTHONPATH $RCDB_HOME/python
 end

@@ -25,6 +25,9 @@ abbr ovim 'vim'
 # meson
 abbr msw 'meson setup --wipe'
 
+# docker
+abbr dri 'docker run -it --rm'
+
 # clusters
 abbr sq "squeue -u $USER"
 abbr slurmq "slurmJobs -u $USER"

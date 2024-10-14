@@ -75,6 +75,15 @@ if test -d $home_dilks/builds/root
   prevd
 end
 
+# ~/j builds
+set -l jprefix $home_dilks/j/install
+if test -d $jprefix
+  set -xp PKG_CONFIG_PATH   $jprefix/lib/pkgconfig
+  set -xp PATH              $jprefix/bin
+  set -xp LD_LIBRARY_PATH   $jprefix/lib
+  set -xp ROOT_INCLUDE_PATH $jprefix/include
+end
+
 # RubyROOT
 if test -d $home_dilks/builds/RubyROOT-install
   set -xp RUBYLIB $home_dilks/builds/RubyROOT-install/lib/ruby

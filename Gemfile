@@ -1,13 +1,4 @@
 # personal gem file
-# `ln -svf .gemfile Gemfile`
-# `bundle install`
-source 'https://rubygems.org'
-gem 'arx'
-gem 'colorize'
-gem 'pry'
-gem 'pry-doc'
-gem 'awesome_print'
-gem 'thread'
-gem 'matplotlib'
-gem 'numpy'
-gem 'pandas'
+#
+# NOTE: this has been converted to the script bin/reinstall_ruby_gems
+#

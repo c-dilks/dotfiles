@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+gems=(
+  arx
+  colorize
+  pry
+  pry-doc
+  awesome_print
+  thread
+  matplotlib
+  numpy
+  pandas
+)
+
+gem install --user-install ${gems[@]}

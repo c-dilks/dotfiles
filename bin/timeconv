@@ -12,7 +12,7 @@ when 1
 when 2
   hour, min = ARGV.map(&:to_f)
   puts "#{hour} hr  #{min} min"
-  puts " =>  #{hour + min/60} hr".colorize(:color => :green, :mode => :bold)
+  puts " =>  #{(hour + min/60).round 1} hr".colorize(:color => :green, :mode => :bold)
 else
   $stderr.puts """
   USAGE:

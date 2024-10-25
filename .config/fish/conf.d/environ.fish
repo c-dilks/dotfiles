@@ -111,6 +111,16 @@ if test -d $home_dilks/j/rcdb
 end
 test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
 
+# iguana
+set -l iguana_prefix $home_dilks/j/iguana/install
+if test -d $iguana_prefix
+  set -xp PKG_CONFIG_PATH $iguana_prefix/lib/pkgconfig
+  set -xp PATH $iguana_prefix/bin
+  set -xp LD_LIBRARY_PATH $iguana_prefix/lib
+  set -xp PYTHONPATH $iguana_prefix/python
+  set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
+end
+
 ##################################################################################
 
 # ifarm stuff

@@ -40,9 +40,11 @@ if command -sq ruby && command -sq gem
 end
 set -x RBENV_ROOT $home_dilks/.rbenv
 if test -d $RBENV_ROOT
-  set -xp PATH $RBENV_ROOT/bin
-  eval "$(rbenv init - fish)" # use rbenv ruby shim
-  set -x PYTHON (which python) # for pycall gem
+  if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
+    set -xp PATH $RBENV_ROOT/bin
+    eval "(rbenv init - fish)" # use rbenv ruby shim
+    set -x PYTHON (which python) # for pycall gem
+  end
 end
 
 ##################################################################################
@@ -124,6 +126,6 @@ end
 ##################################################################################
 
 # ifarm stuff
-if string match --regex "ifarm" (hostname)
+if on_ifarm
   set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
 end

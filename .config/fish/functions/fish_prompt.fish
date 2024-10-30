@@ -20,7 +20,7 @@ function fish_prompt --description 'Adapted from Informative prompt'
   set -g __fish_git_prompt_color_stagedstate bryellow
   set -g __fish_git_prompt_color_invalidstate brred
   set -g __fish_git_prompt_color_cleanstate brgreen
-  set -l status_git (fish_git_prompt)
+  set -l status_git (fish_git_prompt || printf \n)
 
   if functions -q fish_is_root_user; and fish_is_root_user
     printf '%s########### %s%s%s\n %s#%s              %s[%s] %s%s@%s%s%s\n%s %s###%s ' \

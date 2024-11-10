@@ -42,7 +42,7 @@ set -x RBENV_ROOT $home_dilks/.rbenv
 if test -d $RBENV_ROOT
   if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
     set -xp PATH $RBENV_ROOT/bin
-    eval "(rbenv init - fish)" # use rbenv ruby shim
+    eval "$(rbenv init - fish)" # use rbenv ruby shim
     set -x PYTHON (which python) # for pycall gem
   end
 end

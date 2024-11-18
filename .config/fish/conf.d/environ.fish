@@ -123,6 +123,15 @@ if test -d $iguana_prefix
   set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
 end
 
+# pythia8
+set -l pythia_prefix $home_dilks/j/pythia/install
+if test -d $pythia_prefix
+  set -xp PATH            $pythia_prefix/bin
+  set -xp LD_LIBRARY_PATH $pythia_prefix/lib
+  set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
+end
+
+
 ##################################################################################
 
 # ifarm stuff

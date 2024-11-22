@@ -38,14 +38,14 @@ if command -sq ruby && command -sq gem
   # use local ruby gems
   set -xp PATH (ruby -r rubygems -e 'puts Gem.user_dir')/bin
 end
-set -x RBENV_ROOT $home_dilks/.rbenv
-if test -d $RBENV_ROOT
-  if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
-    set -xp PATH $RBENV_ROOT/bin
-    eval "$(rbenv init - fish)" # use rbenv ruby shim
-    set -x PYTHON (which python) # for pycall gem
-  end
-end
+# set -x RBENV_ROOT $home_dilks/.rbenv
+# if test -d $RBENV_ROOT
+#   if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
+#     set -xp PATH $RBENV_ROOT/bin
+#     eval "(rbenv init - fish)" # use rbenv ruby shim
+#     set -x PYTHON (which python) # for pycall gem
+#   end
+# end
 
 ##################################################################################
 

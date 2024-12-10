@@ -138,6 +138,7 @@ end
 if on_ifarm
   # modules environment
   source /usr/share/Modules/init/fish
+  module purge
   module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
   module load clas12
   module load workflow

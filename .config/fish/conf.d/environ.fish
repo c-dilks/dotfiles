@@ -141,7 +141,7 @@ if on_ifarm
   module purge
   module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
   module load clas12
-  module load workflow
+  # module load workflow
   module load pythia/8.310
   # handle maven's need for `exec` /tmp
   set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp

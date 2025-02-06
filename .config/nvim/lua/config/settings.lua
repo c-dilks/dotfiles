@@ -5,6 +5,7 @@ vim.o.title          = true  -- show filename in title
 vim.o.autoread       = true  -- detect changes and auto-reload
 vim.o.wrap           = false -- enable sidescrolling
 vim.o.sidescroll     = 1     -- smooth sidescrolling
+vim.o.scrolloff      = 5     -- don't let the cursor be less than this many lines away from the top or bottom
 vim.o.mouse          = 'a'   -- enable mouse in all modes
 
 -- indentation

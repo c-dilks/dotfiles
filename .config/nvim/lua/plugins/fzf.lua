@@ -27,7 +27,7 @@ return {
           S = [[Tags! <C-R><C-W>]],
           r = [[Rg!]],
           R = [[Rg! <C-R><C-W>]],
-          l = [[BLines!]],
+          -- l = [[BLines!]],
           b = [[Buffers]],
         },
       })

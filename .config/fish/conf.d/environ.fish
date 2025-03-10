@@ -103,7 +103,7 @@ if test -d $home_dilks/j/coatjava/coatjava
   set -x COATJAVA $home_dilks/j/coatjava/coatjava
   set -xp PATH $COATJAVA/bin
 end
-test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
+# test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
 
 # rcdb
 if test -d $home_dilks/j/rcdb
@@ -111,7 +111,7 @@ if test -d $home_dilks/j/rcdb
   set -xp PATH $RCDB_HOME $RCDB_HOME/bin
   set -xp PYTHONPATH $RCDB_HOME/python
 end
-test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
+# test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
 
 # iguana
 set -l iguana_prefix $home_dilks/j/iguana/install

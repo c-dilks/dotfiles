@@ -60,7 +60,7 @@ vim.keymap.set('', [['']], [[<C-W><C-W>]])
 vim.keymap.set('', [[<Leader><Leader>]], [[<C-w>]])
 
 -- toggle spellcheck
-vim.keymap.set({'n', 'v'}, [[<F11>s]], function()
+vim.keymap.set({'n', 'v'}, [[<F10>s]], function()
   vim.o.spell = not vim.o.spell
   if vim.o.spell then
     vim.notify('enable spellcheck')
@@ -70,7 +70,7 @@ vim.keymap.set({'n', 'v'}, [[<F11>s]], function()
 end)
 
 -- toggle whitespace diffs
-vim.keymap.set({'n', 'v'}, [[<F11>w]], function()
+vim.keymap.set({'n', 'v'}, [[<F10>w]], function()
   if vim.o.diffopt:find('iwhiteall') then
     vim.notify('show whitespace diffs')
     vim.cmd('set diffopt-=iwhiteall')

@@ -39,6 +39,7 @@ return {
       mason_lspconfig.setup {
         ensure_installed = {
           'clangd',
+          'jdtls',
         },
         automatic_installation = true,
       }
@@ -47,17 +48,30 @@ return {
       lspconfig.clangd.setup {
         root_dir = function(fname)
           return require('lspconfig.util').root_pattern(
-            'Makefile',
-            'configure.ac',
-            'configure.in',
-            'config.h.in',
-            'meson.build',
-            'meson.options',
-            'compile_commands.json',
-            'build.ninja'
-            )(fname) or require('lspconfig.util').root_pattern('compile_commands.json', 'compile_flags.txt')(
-          fname
-          ) or require('lspconfig.util').find_git_ancestor(fname)
+              'Makefile',
+              'configure.ac',
+              'configure.in',
+              'config.h.in',
+              'meson.build',
+              'meson.options',
+              'compile_commands.json',
+              'build.ninja'
+            )(fname) or
+            require('lspconfig.util').root_pattern(
+              'compile_commands.json',
+              'compile_flags.txt'
+            )(fname) or
+            require('lspconfig.util').find_git_ancestor(fname)
+        end,
+      }
+
+      -- LSP jdtls
+      lspconfig.jdtls.setup {
+        root_dir = function(fname)
+          return require('lspconfig.util').root_pattern(
+          'pom.xml'
+          )(fname) or
+          require('lspconfig.util').find_git_ancestor(fname)
         end,
       }
 

@@ -26,8 +26,8 @@ return {
       })
     end,
   },
-  {
-    'HiPhish/rainbow-delimiters.nvim',
-    lazy = false,
-  }
+  -- {
+  --   'HiPhish/rainbow-delimiters.nvim',
+  --   lazy = false,
+  -- }
 }

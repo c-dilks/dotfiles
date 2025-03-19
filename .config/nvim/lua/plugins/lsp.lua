@@ -28,7 +28,7 @@ return {
       local mason           = require('mason')
       local mason_lspconfig = require('mason-lspconfig')
       local lspconfig       = require('lspconfig')
-      lsp_zero.preset('recommended')
+      -- lsp_zero.preset('recommended') -- deprecated
       lsp_zero.setup()
       mason.setup()
       mason_lspconfig.setup_handlers {

@@ -2,8 +2,6 @@
 functions/__bass.py
 functions/bass.fish
 
-# fifc
-functions/_fifc*.fish
-functions/fifc.fish
-completions/fifc.fish
-conf.d/fifc.fish
+# fisher
+completions/fisher.fish
+functions/fisher.fish

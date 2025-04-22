@@ -129,15 +129,6 @@ if status --is-interactive
     set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
   end
 
-  # pythia8
-  set -l pythia_prefix $home_dilks/j/pythia/install
-  if test -d $pythia_prefix
-    set -xp PATH            $pythia_prefix/bin
-    set -xp LD_LIBRARY_PATH $pythia_prefix/lib
-    set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
-  end
-
-
   ##################################################################################
 
   # ifarm stuff
@@ -148,10 +139,20 @@ if status --is-interactive
     module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
     module load clas12
     # module load workflow
-    module load pythia/8.310
+    # module load pythia/8.310
     # handle maven's need for `exec` /tmp
     set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
   end
 
+  ##################################################################################
+  # override ifarm stuff
+
+  # pythia8
+  set -l pythia_prefix $home_dilks/j/pythia/install
+  if test -d $pythia_prefix
+    set -xp PATH            $pythia_prefix/bin
+    set -xp LD_LIBRARY_PATH $pythia_prefix/lib
+    set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
+  end
 
 end # if status --is-interactive

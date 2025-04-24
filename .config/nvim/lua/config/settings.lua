@@ -16,3 +16,7 @@ vim.o.shiftwidth  = 2    -- number of spaces to use for auto-indent
 vim.o.softtabstop = 2
 vim.o.smarttab    = true -- insert tabs at beginning of line
 vim.o.smartindent = true -- C-like auto indentaion
+
+-- diffopt
+vim.opt.diffopt:append("internal")
+vim.opt.diffopt:append("algorithm:histogram")

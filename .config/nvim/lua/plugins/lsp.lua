@@ -39,7 +39,7 @@ return {
       mason_lspconfig.setup {
         ensure_installed = {
           'clangd',
-          -- 'jdtls',
+          'jdtls',
         },
         automatic_installation = true,
       }
@@ -66,14 +66,14 @@ return {
       }
 
       -- LSP jdtls
-      -- lspconfig.jdtls.setup {
-      --   root_dir = function(fname)
-      --     return require('lspconfig.util').root_pattern(
-      --     'pom.xml'
-      --     )(fname) or
-      --     require('lspconfig.util').find_git_ancestor(fname)
-      --   end,
-      -- }
+      lspconfig.jdtls.setup {
+        root_dir = function(fname)
+          return require('lspconfig.util').root_pattern(
+          'pom.xml'
+          )(fname) or
+          require('lspconfig.util').find_git_ancestor(fname)
+        end,
+      }
 
     end,
   },

@@ -1,3 +1,9 @@
+# fish
+- install `fisher`
+```
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+```
+
 # Zsh
 - install `zsh` from `pacman`
 - install `zsh-syntax-highlighting` by cloning https://github.com/zsh-users/zsh-syntax-highlighting.git to `~/builds/`

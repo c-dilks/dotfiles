@@ -23,6 +23,19 @@ return {
       vim.keymap.set({'n', 'v'}, [[Ln]], vim.diagnostic.goto_next)
       vim.keymap.set({'n', 'v'}, [[Lp]], vim.diagnostic.goto_prev)
 
+      -- set list of LSPs
+      local lsps = {
+        'clangd',
+        'jdtls',
+      }
+      -- choose only LSPs which are available
+      local lsps_avail = {}
+      for i,lsp in ipairs(lsps) do
+        if vim.fn.executable(lsp) == 1 then
+          table.insert(lsps_avail, lsp)
+        end
+      end
+
       -- mason setup
       local lsp_zero        = require('lsp-zero')
       local mason           = require('mason')
@@ -37,43 +50,44 @@ return {
         end
       }
       mason_lspconfig.setup {
-        ensure_installed = {
-          'clangd',
-          'jdtls',
-        },
+        ensure_installed = lsps_avail,
         automatic_installation = true,
       }
 
       -- LSP clangd
-      lspconfig.clangd.setup {
-        root_dir = function(fname)
-          return require('lspconfig.util').root_pattern(
-              'Makefile',
-              'configure.ac',
-              'configure.in',
-              'config.h.in',
-              'meson.build',
-              'meson.options',
-              'compile_commands.json',
-              'build.ninja'
-            )(fname) or
-            require('lspconfig.util').root_pattern(
-              'compile_commands.json',
-              'compile_flags.txt'
-            )(fname) or
-            require('lspconfig.util').find_git_ancestor(fname)
-        end,
-      }
+      if vim.fn.executable('clangd') == 1 then
+        lspconfig.clangd.setup {
+          root_dir = function(fname)
+            return require('lspconfig.util').root_pattern(
+                'Makefile',
+                'configure.ac',
+                'configure.in',
+                'config.h.in',
+                'meson.build',
+                'meson.options',
+                'compile_commands.json',
+                'build.ninja'
+              )(fname) or
+              require('lspconfig.util').root_pattern(
+                'compile_commands.json',
+                'compile_flags.txt'
+              )(fname) or
+              require('lspconfig.util').find_git_ancestor(fname)
+          end,
+        }
+      end
 
       -- LSP jdtls
-      lspconfig.jdtls.setup {
-        root_dir = function(fname)
-          return require('lspconfig.util').root_pattern(
-          'pom.xml'
-          )(fname) or
-          require('lspconfig.util').find_git_ancestor(fname)
-        end,
-      }
+      if vim.fn.executable('jdtls') == 1 then
+        lspconfig.jdtls.setup {
+          root_dir = function(fname)
+            return require('lspconfig.util').root_pattern(
+            'pom.xml'
+            )(fname) or
+            require('lspconfig.util').find_git_ancestor(fname)
+          end,
+        }
+      end
 
     end,
   },

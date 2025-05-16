@@ -3,6 +3,7 @@
 ```
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 ```
+- compare `fish_variables` files with other systems, and make adjustments if needed
 
 # Zsh
 - install `zsh` from `pacman`

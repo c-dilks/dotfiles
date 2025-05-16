@@ -24,7 +24,7 @@ set -gx LS_COLORS 'di=01;33:ln=01;32:mi=01;30:ex=01;36'
 if status --is-interactive
 
   # paths
-  set -xp PATH . $home_dilks/bin $home_dilks/builds/bin
+  set -xp PATH . $home_dilks/bin $home_dilks/bin.private $home_dilks/builds/bin
   set -xp CLASSPATH . # java class path
 
   ##################################################################################

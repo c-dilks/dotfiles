@@ -1,0 +1,96 @@
+#!/usr/bin/env ruby
+
+MacroDir = __dir__  # directory of installed macros
+ExeName = File.basename __FILE__
+
+# usage
+if ARGV.length<1
+  puts """
+  Wrapper for running ROOT macros with simpler syntax
+
+  USAGE: #{ExeName} [ROOT_OPTIONS]... [MACRO] [MACRO_ARGUMENTS]...
+
+    ROOT_OPTIONS        options for `root`, e.g., `-q`
+                        - the `-l` option will always be applied
+                        - default: ''
+
+    MACRO               the ROOT macro; must end with '.C', and can be:
+                        - an installed macro (run `#{ExeName} help`)
+                        - a local macro in `.` or anywhere else
+
+    MACRO_ARGUMENTS     arguments for the ROOT macro
+                        - end an argument with \"!\" to pass it as a string
+
+  MACRO HELP:
+      #{ExeName} help           # list installed macros
+      #{ExeName} help [MACRO]   # usage guidance for any macro MACRO
+
+  EXAMPLE:
+      #{ExeName} -b -q macro.C string! 1, 3.0
+      # runs root -b -q macro.C'(\"string\",1,3.0)'
+  """
+  exit 2
+end
+
+# function to find a macro
+def find_macro(file_name)
+  # first try relative/absolute path
+  if File.exist? file_name
+    return file_name
+  end
+  # then try `MacroDir`
+  installed_file_name = File.join MacroDir, file_name
+  if File.exist? installed_file_name
+    return installed_file_name
+  end
+  # otherwise fail
+  raise "cannot find macro named '#{file_name}'"
+end
+
+# macro guidance
+if ARGV[0] == 'help'
+  case ARGV.length
+  when 1
+    puts "LIST OF INSTALLED MACROS
+    directory: #{MacroDir}
+    """
+    Dir.glob("#{MacroDir}/*.C").each do |it|
+      puts "      #{File.basename it}"
+    end
+    puts """
+    Run `#{ExeName} help [MACRO]` for some usage guidance of the macro
+    """
+    exit 2
+  when 2
+    macro_name = find_macro ARGV[1]
+    exec "grep --color=auto -C10 -w '#{File.basename macro_name, '.C'}' #{macro_name}"
+  else
+    raise "too many arguments for option 'help'"
+  end
+end
+
+# parse arguments
+macroIdx = ARGV.find_index{ |arg| arg.match? /\.C$/ }
+if macroIdx.nil?
+  $stderr.puts "ERROR: you forgot to specify a macro (must end in .C)"
+  exit 1
+end
+args_root  = macroIdx>0 ? ARGV[..macroIdx-1] : []
+macro_name = find_macro ARGV[macroIdx]
+args_macro = ARGV[macroIdx+1..]
+
+# add quotes around strings that end in !
+args_macro.map! do |arg|
+  if arg.match? /!$/
+    "\"#{arg.gsub(/!$/,"")}\""
+  else
+    arg
+  end
+end
+
+# run the macro
+exec [
+  'root',
+  *args_root,
+  "'#{macro_name}(#{args_macro.join ','})'",
+].join ' '

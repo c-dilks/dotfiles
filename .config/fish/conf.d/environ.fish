@@ -122,10 +122,10 @@ if status --is-interactive
     end
 
     # coatjava
-    # if test -d $home_dilks/j/coatjava/coatjava
-    #   set -x COATJAVA $home_dilks/j/coatjava/coatjava
-    #   set -xp PATH $COATJAVA/bin
-    # end
+    if test -d $home_dilks/j/coatjava/coatjava
+      set -x COATJAVA $home_dilks/j/coatjava/coatjava
+      set -xp PATH $COATJAVA/bin
+    end
     # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
 
     # rcdb

@@ -121,13 +121,6 @@ if status --is-interactive
       set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
     end
 
-    # coatjava
-    if test -d $home_dilks/j/coatjava/coatjava
-      set -x COATJAVA $home_dilks/j/coatjava/coatjava
-      set -xp PATH $COATJAVA/bin
-    end
-    # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
-
     # rcdb
     if test -d $home_dilks/j/rcdb
       set -x RCDB_HOME $home_dilks/j/rcdb
@@ -171,6 +164,14 @@ if status --is-interactive
       set -xp LD_LIBRARY_PATH $pythia_prefix/lib
       set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
     end
+
+    # coatjava
+    if test -d $home_dilks/j/coatjava/coatjava
+      set -x COATJAVA $home_dilks/j/coatjava/coatjava
+      set -xp PATH $COATJAVA/bin
+    end
+    # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
+
 
   end # if not in_apptainer_container
 end # if status --is-interactive

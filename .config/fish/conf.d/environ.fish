@@ -53,6 +53,11 @@ if status --is-interactive
   #   end
   # end
 
+  # apptainer
+  if test (hostname) = 'altair'
+    set -x APPTAINER_TMPDIR $home_dilks/containers/tmp
+  end
+
   ##################################################################################
 
   # ripgrep

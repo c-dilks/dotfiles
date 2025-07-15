@@ -31,6 +31,15 @@ function fish_prompt --description 'Adapted from Informative prompt'
       (set_color brred) $USER (prompt_hostname) \
       (set_color normal) $status_git \
       $pipestatus_string (set_color brred)
+  else if set -q APPTAINER_CONTAINER
+    printf '%s<><><><><> %s%s%s\n %s#%s              %s[%s] %s%s@%s%s%s\n%s %s>>>%s ' \
+      (set_color -b 333333 brred) \
+      (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) \
+      (set_color -b 333333 brred) (set_color normal) \
+      (set_color brmagenta) (date '+%a %T') \
+      (set_color brred) $USER (prompt_hostname) \
+      (set_color normal) $status_git \
+      $pipestatus_string (set_color brred)
   else if on_ifarm
     printf '%s<<<<<<<<<<< %s%s%s\n %s:%s              %s[%s] %s%s@%s%s%s\n%s %s>>>%s ' \
       (set_color -b 333333 brcyan) \

@@ -10,5 +10,5 @@ function ssha --description 'add SSH keys'
     echo "set -x" (env | grep SSH_AUTH_SOCK | sed 's/=/ /g') >> $HOME/.sshenv.fish
     chmod 600 $HOME/.sshenv.fish
   end
-  ssh-add -t 8h (ls $HOME/.ssh/*.pub | sed 's;\.pub$;;')
+  ssh-add -t 11h (ls $HOME/.ssh/*.pub | sed 's;\.pub$;;')
 end

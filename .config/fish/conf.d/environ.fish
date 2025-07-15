@@ -90,8 +90,8 @@ if status --is-interactive
     # apptainer
     if test (hostname) = 'altair'
       set -x APPTAINER_TMPDIR $home_dilks/containers/tmp
+      set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,/arc0" | sed 's/^,//')
     end
-
 
     # ROOT
     if test -d $home_dilks/builds/root

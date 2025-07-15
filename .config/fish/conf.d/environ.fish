@@ -24,41 +24,20 @@ set -gx LS_COLORS 'di=01;33:ln=01;32:mi=01;30:ex=01;36'
 if status --is-interactive
 
   # paths
-  set -xp PATH . $home_dilks/bin $home_dilks/bin.private $home_dilks/builds/bin
+  set -xp PATH . $home_dilks/bin $home_dilks/bin.private
+  if not in_apptainer_container
+    set -xp PATH $home_dilks/builds/bin
+  end
   set -xp CLASSPATH . # java class path
 
+  ##################################################################################
+  # CUSTOM SETTINGS
   ##################################################################################
 
   # cmake
   if command -sq ninja
     set -x CMAKE_GENERATOR Ninja
   end
-
-  # python shims ### FIXME use virtualfish, or 'abbr workhere 'source .venv/bin/activate.fish'
-  # if type virtualenvwrapper.sh > /dev/null; then
-  #   source virtualenvwrapper.sh
-  # fi
-
-  # ruby shims
-  if command -sq ruby && command -sq gem
-    # use local ruby gems
-    set -xp PATH (ruby -r rubygems -e 'puts Gem.user_dir')/bin
-  end
-  # set -x RBENV_ROOT $home_dilks/.rbenv
-  # if test -d $RBENV_ROOT
-  #   if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
-  #     set -xp PATH $RBENV_ROOT/bin
-  #     eval "(rbenv init - fish)" # use rbenv ruby shim
-  #     set -x PYTHON (which python) # for pycall gem
-  #   end
-  # end
-
-  # apptainer
-  if test (hostname) = 'altair'
-    set -x APPTAINER_TMPDIR $home_dilks/containers/tmp
-  end
-
-  ##################################################################################
 
   # ripgrep
   if test -f $home_dilks/.ripgrep
@@ -80,84 +59,118 @@ if status --is-interactive
   end
 
   ##################################################################################
-
-  # ROOT
-  if test -d $home_dilks/builds/root
-    cd $home_dilks/builds/root
-    source bin/thisroot.fish
-    prevd
-  end
-
-  # ~/j builds
-  set -l jprefix $home_dilks/j/install
-  if test -d $jprefix
-    set -xp PKG_CONFIG_PATH   $jprefix/lib/pkgconfig
-    set -xp PATH              $jprefix/bin
-    set -xp LD_LIBRARY_PATH   $jprefix/lib
-    set -xp ROOT_INCLUDE_PATH $jprefix/include
-  end
-
-  # RubyROOT
-  if test -d $home_dilks/builds/RubyROOT-install
-    set -xp RUBYLIB $home_dilks/builds/RubyROOT-install/lib/ruby
-  end
-
-  # clas12root
-  if test -d $home_dilks/j/clas12root
-    set -x CLAS12ROOT $home_dilks/j/clas12root
-    set -xp PATH $CLAS12ROOT/bin
-    set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
-  end
-
-  # coatjava
-  if test -d $home_dilks/j/coatjava/coatjava
-    set -x COATJAVA $home_dilks/j/coatjava/coatjava
-    set -xp PATH $COATJAVA/bin
-  end
-  # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
-
-  # rcdb
-  if test -d $home_dilks/j/rcdb
-    set -x RCDB_HOME $home_dilks/j/rcdb
-    set -xp PATH $RCDB_HOME $RCDB_HOME/bin
-    set -xp PYTHONPATH $RCDB_HOME/python
-  end
-  # test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
-
+  # INSTALLED SOFTWARE PATHS etc.
   ##################################################################################
 
-  # ifarm stuff
-  if on_ifarm
-    # modules environment
-    source /usr/share/Modules/init/fish
-    module purge
-    module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
-    module load clas12
-    # module load workflow
-    # module load pythia/8.310
-    # handle maven's need for `exec` /tmp
-    set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
-  end
+  if not in_apptainer_container # do NOT conflict with apptainer container's stuff
 
-  ##################################################################################
-  # override ifarm stuff
+    # --------------------------------------------------------------------------------
+    # software which will be OVERRIDDEN by 'ifarm' modules (cf. below)
+    # --------------------------------------------------------------------------------
 
-  # iguana
-  set -l iguana_prefix $home_dilks/j/iguana/install
-  if test -d $iguana_prefix
-    set -xp PKG_CONFIG_PATH $iguana_prefix/lib/pkgconfig
-    set -xp PATH $iguana_prefix/bin
-    set -xp LD_LIBRARY_PATH $iguana_prefix/lib
-    set -xp PYTHONPATH $iguana_prefix/python
-    set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
-  end
+    # python shims ### FIXME use virtualfish, or 'abbr workhere 'source .venv/bin/activate.fish'
+    # if type virtualenvwrapper.sh > /dev/null; then
+    #   source virtualenvwrapper.sh
+    # fi
 
-  # pythia8
-  set -l pythia_prefix $home_dilks/j/pythia/install
-  if test -d $pythia_prefix
-    set -xp PATH            $pythia_prefix/bin
-    set -xp LD_LIBRARY_PATH $pythia_prefix/lib
-    set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
-  end
+    # ruby shims
+    if command -sq ruby && command -sq gem
+      # use local ruby gems
+      set -xp PATH (ruby -r rubygems -e 'puts Gem.user_dir')/bin
+    end
+    # set -x RBENV_ROOT $home_dilks/.rbenv
+    # if test -d $RBENV_ROOT
+    #   if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
+    #     set -xp PATH $RBENV_ROOT/bin
+    #     eval "(rbenv init - fish)" # use rbenv ruby shim
+    #     set -x PYTHON (which python) # for pycall gem
+    #   end
+    # end
 
+    # apptainer
+    if test (hostname) = 'altair'
+      set -x APPTAINER_TMPDIR $home_dilks/containers/tmp
+    end
+
+
+    # ROOT
+    if test -d $home_dilks/builds/root
+      cd $home_dilks/builds/root
+      source bin/thisroot.fish
+      prevd
+    end
+
+    # ~/j builds
+    set -l jprefix $home_dilks/j/install
+    if test -d $jprefix
+      set -xp PKG_CONFIG_PATH   $jprefix/lib/pkgconfig
+      set -xp PATH              $jprefix/bin
+      set -xp LD_LIBRARY_PATH   $jprefix/lib
+      set -xp ROOT_INCLUDE_PATH $jprefix/include
+    end
+
+    # RubyROOT
+    if test -d $home_dilks/builds/RubyROOT-install
+      set -xp RUBYLIB $home_dilks/builds/RubyROOT-install/lib/ruby
+    end
+
+    # clas12root
+    if test -d $home_dilks/j/clas12root
+      set -x CLAS12ROOT $home_dilks/j/clas12root
+      set -xp PATH $CLAS12ROOT/bin
+      set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
+    end
+
+    # coatjava
+    if test -d $home_dilks/j/coatjava/coatjava
+      set -x COATJAVA $home_dilks/j/coatjava/coatjava
+      set -xp PATH $COATJAVA/bin
+    end
+    # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
+
+    # rcdb
+    if test -d $home_dilks/j/rcdb
+      set -x RCDB_HOME $home_dilks/j/rcdb
+      set -xp PATH $RCDB_HOME $RCDB_HOME/bin
+      set -xp PYTHONPATH $RCDB_HOME/python
+    end
+    # test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
+
+    # --------------------------------------------------------------------------------
+    # ifarm environment modules
+    # --------------------------------------------------------------------------------
+
+    # ifarm stuff
+    if on_ifarm
+      source /usr/share/Modules/init/fish
+      module purge
+      module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
+      module load clas12
+      # handle maven's need for `exec` /tmp
+      set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
+    end
+
+    # --------------------------------------------------------------------------------
+    # software which OVERRIDES ifarm modules
+    # --------------------------------------------------------------------------------
+
+    # iguana
+    set -l iguana_prefix $home_dilks/j/iguana/install
+    if test -d $iguana_prefix
+      set -xp PKG_CONFIG_PATH $iguana_prefix/lib/pkgconfig
+      set -xp PATH $iguana_prefix/bin
+      set -xp LD_LIBRARY_PATH $iguana_prefix/lib
+      set -xp PYTHONPATH $iguana_prefix/python
+      set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
+    end
+
+    # pythia8
+    set -l pythia_prefix $home_dilks/j/pythia/install
+    if test -d $pythia_prefix
+      set -xp PATH            $pythia_prefix/bin
+      set -xp LD_LIBRARY_PATH $pythia_prefix/lib
+      set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
+    end
+
+  end # if not in_apptainer_container
 end # if status --is-interactive

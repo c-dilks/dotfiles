@@ -33,6 +33,9 @@ abbr sq "squeue -u $USER"
 abbr slurmq "slurmJobs -u $USER"
 abbr jcacheq "jcache pendingRequest -u $USER"
 
+# qadb
+abbr mmm "modify.sh misc"
+
 # shortcut directories
 abbr bbb "cd /home/dilks/j/bihadro"
 abbr ccc "cd /home/dilks/j/coatjava"

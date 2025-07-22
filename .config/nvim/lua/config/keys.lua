@@ -48,6 +48,8 @@ for key, bind in pairs({
 end
 vim.keymap.set({'n','v'}, [[<PageUp>]], [[<C-U>]])
 vim.keymap.set({'n','v'}, [[<PageDown>]], [[<C-D>]])
+vim.keymap.set({'n','v'}, [[<S-Tab>]], [[<C-U>]])
+vim.keymap.set({'n','v'}, [[<Tab>]], [[<C-D>]])
 
 -- jump to beginning or end of line in insert mode (also works for normal mode)
 vim.keymap.set({'i','n'}, [[<M-a>]], [[<Esc>A]])

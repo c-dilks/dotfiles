@@ -44,11 +44,6 @@ return {
       -- lsp_zero.preset('recommended') -- deprecated
       lsp_zero.setup()
       mason.setup()
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          lspconfig[server_name].setup {}
-        end
-      }
       mason_lspconfig.setup {
         ensure_installed = lsps_avail,
         automatic_installation = true,

@@ -29,7 +29,7 @@ abbr msw 'meson setup --wipe'
 abbr dri 'docker run -it --rm'
 
 # clusters
-abbr sq "squeue --me"
+abbr sq "squeue --me --format '%.18i %.30j %.8T %.10M %.10l %Q'"
 abbr jcacheq "jcache pendingRequest -u $USER"
 
 # qadb

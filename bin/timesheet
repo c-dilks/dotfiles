@@ -6,8 +6,8 @@ require 'colorize'
 ##############################
 FRACTIONS = {
   :total => 1.0,
-  :BOPS  => 0.95,
-  :BRES  => 0.05,
+  :BOPS  => 0.85,
+  :BRES  => 0.15,
 }
 DAILY_HOURS = 8.0
 ##############################

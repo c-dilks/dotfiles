@@ -122,12 +122,16 @@ if status --is-interactive
     end
 
     # rcdb
+    set -x RCDB_CONNECTION mysql://rcdb@clasdb.jlab.org/rcdb
     if test -d $home_dilks/j/rcdb
       set -x RCDB_HOME $home_dilks/j/rcdb
       set -xp PATH $RCDB_HOME $RCDB_HOME/bin
       set -xp PYTHONPATH $RCDB_HOME/python
     end
     # test -n "$RCDB_HOME" && set -xp CLASSPATH "$RCDB_HOME/java/out/artifacts/rcdb_jar/*"
+
+    # ccdb
+    set -x CCDB_CONNECTION mysql://clas12reader@clasdb.jlab.org/clas12
 
     # --------------------------------------------------------------------------------
     # ifarm environment modules

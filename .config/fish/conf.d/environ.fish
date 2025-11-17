@@ -143,6 +143,7 @@ if status --is-interactive
       module purge
       module use /scigroup/cvmfs/hallb/clas12/sw/modulefiles
       module load clas12
+      module unload iguana # don't mix up module iguana when testing local iguana
       # handle maven's need for `exec` /tmp
       set -x MAVEN_OPTS -Djava.io.tmpdir=/volatile/clas12/users/dilks/tmp
     end

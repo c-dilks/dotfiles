@@ -36,7 +36,10 @@ if status --is-interactive
 
   # cmake
   if command -sq ninja
+    # prefer Ninja over Makefile
     set -x CMAKE_GENERATOR Ninja
+    # make sure `compile_commands.json` always gets generated, for `clangd` support
+    set -x CMAKE_EXPORT_COMPILE_COMMANDS ON
   end
 
   # ripgrep

@@ -1,7 +1,5 @@
 #!/usr/bin/env fish
 
-set -l home_dilks /home/dilks
-
 # main
 set -x EDITOR nvim
 
@@ -24,9 +22,9 @@ set -gx LS_COLORS 'di=01;33:ln=01;32:mi=01;30:ex=01;36'
 if status --is-interactive
 
   # paths
-  set -xp PATH . $home_dilks/bin $home_dilks/bin.private
+  set -xp PATH . $HOME/bin $HOME/bin.private
   if not in_apptainer_container
-    set -xp PATH $home_dilks/builds/bin
+    set -xp PATH $HOME/builds/bin
   end
   set -xp CLASSPATH . # java class path
 
@@ -43,8 +41,8 @@ if status --is-interactive
   end
 
   # ripgrep
-  if test -f $home_dilks/.ripgrep
-    set -x RIPGREP_CONFIG_PATH $home_dilks/.ripgrep
+  if test -f $HOME/.ripgrep
+    set -x RIPGREP_CONFIG_PATH $HOME/.ripgrep
   end
 
   # fzf
@@ -57,8 +55,8 @@ if status --is-interactive
   end
 
   # ssh-agent
-  if test -f $home_dilks/.sshenv.fish
-    source $home_dilks/.sshenv.fish
+  if test -f $HOME/.sshenv.fish
+    source $HOME/.sshenv.fish
   end
 
   ##################################################################################
@@ -81,7 +79,7 @@ if status --is-interactive
       # use local ruby gems
       set -xp PATH (ruby -r rubygems -e 'puts Gem.user_dir')/bin
     end
-    # set -x RBENV_ROOT $home_dilks/.rbenv
+    # set -x RBENV_ROOT $HOME/.rbenv
     # if test -d $RBENV_ROOT
     #   if not on_ifarm ### FIXME: having trouble with fish + rbenv + ifarm
     #     set -xp PATH $RBENV_ROOT/bin
@@ -92,19 +90,19 @@ if status --is-interactive
 
     # apptainer
     if test (hostname) = 'altair'
-      set -x APPTAINER_TMPDIR $home_dilks/containers/tmp
+      set -x APPTAINER_TMPDIR $HOME/containers/tmp
       set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,/arc0" | sed 's/^,//')
     end
 
     # ROOT
-    if test -d $home_dilks/builds/root
-      cd $home_dilks/builds/root
+    if test -d $HOME/builds/root
+      cd $HOME/builds/root
       source bin/thisroot.fish
       prevd
     end
 
     # ~/j builds
-    set -l jprefix $home_dilks/j/install
+    set -l jprefix $HOME/j/install
     if test -d $jprefix
       set -xp PKG_CONFIG_PATH   $jprefix/lib/pkgconfig
       set -xp PATH              $jprefix/bin
@@ -113,21 +111,21 @@ if status --is-interactive
     end
 
     # RubyROOT
-    if test -d $home_dilks/builds/RubyROOT-install
-      set -xp RUBYLIB $home_dilks/builds/RubyROOT-install/lib/ruby
+    if test -d $HOME/builds/RubyROOT-install
+      set -xp RUBYLIB $HOME/builds/RubyROOT-install/lib/ruby
     end
 
     # clas12root
-    if test -d $home_dilks/j/clas12root
-      set -x CLAS12ROOT $home_dilks/j/clas12root
+    if test -d $HOME/j/clas12root
+      set -x CLAS12ROOT $HOME/j/clas12root
       set -xp PATH $CLAS12ROOT/bin
       set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
     end
 
     # rcdb
     set -x RCDB_CONNECTION mysql://rcdb@clasdb.jlab.org/rcdb
-    if test -d $home_dilks/j/rcdb
-      set -x RCDB_HOME $home_dilks/j/rcdb
+    if test -d $HOME/j/rcdb
+      set -x RCDB_HOME $HOME/j/rcdb
       set -xp PATH $RCDB_HOME $RCDB_HOME/bin
       set -xp PYTHONPATH $RCDB_HOME/python
     end
@@ -156,7 +154,7 @@ if status --is-interactive
     # --------------------------------------------------------------------------------
 
     # iguana
-    set -l iguana_prefix $home_dilks/j/iguana/install
+    set -l iguana_prefix $HOME/j/iguana/install
     if test -d $iguana_prefix
       set -xp PKG_CONFIG_PATH $iguana_prefix/lib/pkgconfig
       set -xp PATH $iguana_prefix/bin
@@ -166,7 +164,7 @@ if status --is-interactive
     end
 
     # pythia8
-    set -l pythia_prefix $home_dilks/j/pythia/install
+    set -l pythia_prefix $HOME/j/pythia/install
     if test -d $pythia_prefix
       set -xp PATH            $pythia_prefix/bin
       set -xp LD_LIBRARY_PATH $pythia_prefix/lib
@@ -174,8 +172,8 @@ if status --is-interactive
     end
 
     # coatjava
-    if test -d $home_dilks/j/coatjava/coatjava
-      set -x COATJAVA $home_dilks/j/coatjava/coatjava
+    if test -d $HOME/j/coatjava/coatjava
+      set -x COATJAVA $HOME/j/coatjava/coatjava
       set -xp PATH $COATJAVA/bin
     end
     # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"

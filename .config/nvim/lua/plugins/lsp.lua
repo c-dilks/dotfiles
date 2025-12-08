@@ -1,17 +1,13 @@
 return {
   {
-    'VonHeikemen/lsp-zero.nvim',
-    -- enabled = false,
-    dependencies = {
-      'neovim/nvim-lspconfig',
-    },
-  },
-  {
-    'williamboman/mason.nvim',
-    -- enabled = false,
+    'neovim/nvim-lspconfig',
+    enabled = true,
     lazy = false,
     dependencies = {
+      'VonHeikemen/lsp-zero.nvim',
       'williamboman/mason-lspconfig.nvim',
+      'williamboman/mason.nvim',
+      'SmiteshP/nvim-navic',
     },
     config = function()
 
@@ -36,21 +32,28 @@ return {
         end
       end
 
-      -- mason setup
-      local lsp_zero        = require('lsp-zero')
-      local mason           = require('mason')
-      local mason_lspconfig = require('mason-lspconfig')
-      -- lsp_zero.preset('recommended') -- deprecated
-      lsp_zero.setup()
-      mason.setup()
-      mason_lspconfig.setup {
+      -- lsp-zero and mason setup
+      require('lsp-zero').setup()
+      require('mason').setup()
+      require('mason-lspconfig').setup {
         ensure_installed = lsps_avail,
         automatic_installation = true,
       }
 
+      -- navic
+      require('nvim-navic').setup {
+        icons = {
+          enabled = false,
+        },
+        lsp = {
+          auto_attach = true,
+        },
+      }
+      vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+
       -- LSP clangd
       if vim.fn.executable('clangd') == 1 then
-        vim.lsp.config('clangd', {
+        vim.lsp.enable('clangd', {
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern(
                 'Makefile',
@@ -73,7 +76,7 @@ return {
 
       -- LSP jdtls
       if vim.fn.executable('jdtls') == 1 then
-        vim.lsp.config('jdtls', {
+        vim.lsp.enable('jdtls', {
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern(
             'pom.xml'

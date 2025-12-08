@@ -40,7 +40,6 @@ return {
       local lsp_zero        = require('lsp-zero')
       local mason           = require('mason')
       local mason_lspconfig = require('mason-lspconfig')
-      local lspconfig       = require('lspconfig')
       -- lsp_zero.preset('recommended') -- deprecated
       lsp_zero.setup()
       mason.setup()
@@ -51,7 +50,7 @@ return {
 
       -- LSP clangd
       if vim.fn.executable('clangd') == 1 then
-        lspconfig.clangd.setup {
+        vim.lsp.config('clangd', {
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern(
                 'Makefile',
@@ -69,19 +68,19 @@ return {
               )(fname) or
               require('lspconfig.util').find_git_ancestor(fname)
           end,
-        }
+        })
       end
 
       -- LSP jdtls
       if vim.fn.executable('jdtls') == 1 then
-        lspconfig.jdtls.setup {
+        vim.lsp.config('jdtls', {
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern(
             'pom.xml'
             )(fname) or
             require('lspconfig.util').find_git_ancestor(fname)
           end,
-        }
+        })
       end
 
     end,

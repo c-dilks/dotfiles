@@ -26,7 +26,6 @@ if status --is-interactive
   if not in_apptainer_container
     set -xp PATH $HOME/builds/bin
   end
-  set -xp CLASSPATH . # java class path
 
   ##################################################################################
   # CUSTOM SETTINGS

@@ -7,7 +7,7 @@ abbr open 'xdg-open'
 abbr bsource 'bass source'
 
 # ROOT
-abbr root 'root -l'
+abbr rootl 'root -l'
 abbr rootq 'root -l -b -q'
 
 # tmux

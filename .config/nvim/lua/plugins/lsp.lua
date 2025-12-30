@@ -11,6 +11,7 @@ return {
       "ray-x/navigator.lua", -- lots of enhancements and keybindings
       { "ray-x/guihua.lua", build = "cd lua/fzy && make" }, -- for `ray-x/navigator.lua`
       "ms-jpq/coq_nvim", -- auto-completion
+      { "ms-jpq/coq.artifacts", branch = "artifacts" }, -- for coq
     },
     init = function()
       -- coq settings
@@ -18,9 +19,13 @@ return {
         auto_start = 'shut-up',
         keymap = {
           manual_complete = '<C-Space>',  -- trigger key
+          -- disable/remap the following, since they conflict with other bindings:
+          jump_to_mark = '', -- default <c-h>
+          bigger_preview = '',  -- default <c-k>
         },
         completion = {
           always = false,  -- don't auto-trigger
+          sticky_manual = false, -- go away after completing something
         },
       }
     end,
@@ -67,6 +72,10 @@ return {
 
       -- ray-x/navigator
       require('navigator').setup {
+        keymaps = {
+          -- disable/remap the following, since they conflict with other bindings:
+          {key = '<c-m>', func = vim.lsp.buf.signature_help, desc = 'signature_help'}, -- default <c-k>
+        },
         icons = {
           icons = true,
           diagnostic_head = '🐛', -- prefix for other diagnostic_* icons

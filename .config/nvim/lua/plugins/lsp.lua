@@ -4,11 +4,26 @@ return {
     enabled = true,
     lazy = false,
     dependencies = {
-      'VonHeikemen/lsp-zero.nvim',
+      'williamboman/mason.nvim', -- package manager
       'williamboman/mason-lspconfig.nvim',
-      'williamboman/mason.nvim',
-      'SmiteshP/nvim-navic',
+      'nvim-treesitter/nvim-treesitter', -- syntax tree, etc.
+      'SmiteshP/nvim-navic', -- top bar, tells you where you are
+      "ray-x/navigator.lua", -- lots of enhancements and keybindings
+      { "ray-x/guihua.lua", build = "cd lua/fzy && make" }, -- for `ray-x/navigator.lua`
+      "ms-jpq/coq_nvim", -- auto-completion
     },
+    init = function()
+      -- coq settings
+      vim.g.coq_settings = {
+        auto_start = 'shut-up',
+        keymap = {
+          manual_complete = '<C-Space>',  -- trigger key
+        },
+        completion = {
+          always = false,  -- don't auto-trigger
+        },
+      }
+    end,
     config = function()
 
       -- general keybindings
@@ -32,8 +47,7 @@ return {
         end
       end
 
-      -- lsp-zero and mason setup
-      require('lsp-zero').setup()
+      -- mason
       require('mason').setup()
       require('mason-lspconfig').setup {
         ensure_installed = lsps_avail,
@@ -51,9 +65,36 @@ return {
       }
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
+      -- ray-x/navigator
+      require('navigator').setup {
+        icons = {
+          icons = true,
+          diagnostic_head = '🐛', -- prefix for other diagnostic_* icons
+          diagnostic_err = '🐺',
+          diagnostic_warn = '🪲',
+          diagnostic_virtual_text = '🦊',
+        },
+        lsp = {
+          format_on_save = false,
+          servers = lsps_avail,
+          diagnostic = {
+            virtual_text = { spacing = 3, source = false },
+            virtual_lines = {
+              current_line = true, -- show diagnostic only on current line
+            },
+            register = true, -- workaround https://github.com/ray-x/navigator.lua/issues/335
+          },
+          -- diagnostic_scrollbar_sign = false,
+          display_diagnostic_qf = true,
+        },
+      }
+
+      -- coq (NOTE: see `init` function above for coq settings)
+      coq = require('coq')
+
       -- LSP clangd
       if vim.fn.executable('clangd') == 1 then
-        vim.lsp.enable('clangd', {
+        vim.lsp.enable('clangd', coq.lsp_ensure_capabilities({
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern(
                 'Makefile',
@@ -71,7 +112,7 @@ return {
               )(fname) or
               require('lspconfig.util').find_git_ancestor(fname)
           end,
-        })
+        }))
       end
 
       -- LSP jdtls

@@ -29,6 +29,9 @@ abbr mtv 'stdbuf -o0 meson test --verbose --print-errorlogs --no-stdsplit'
 # docker
 abbr dri 'docker run -it --rm'
 
+# apptainer
+abbr apprs 'apptainer run --fakeroot --writable-tmpfs --no-mount bind-paths --contain --cleanenv'
+
 # clusters
 abbr sq "squeue --me --format '%.18i %.30j %.8T %.10M %.10l %Q'"
 abbr jcacheq "jcache pendingRequest -u $USER"

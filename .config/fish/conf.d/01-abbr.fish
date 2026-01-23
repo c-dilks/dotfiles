@@ -24,6 +24,7 @@ abbr ovim 'vim'
 
 # meson
 abbr msw 'meson setup --wipe'
+abbr mi 'meson install'
 abbr mtv 'stdbuf -o0 meson test --verbose --print-errorlogs --no-stdsplit'
 
 # docker

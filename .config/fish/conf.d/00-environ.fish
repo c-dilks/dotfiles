@@ -115,11 +115,11 @@ if status --is-interactive
     end
 
     # clas12root
-    if test -d $HOME/j/clas12root
-      set -x CLAS12ROOT $HOME/j/clas12root
-      set -xp PATH $CLAS12ROOT/bin
-      set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
-    end
+    # if test -d $HOME/j/clas12root
+    #   set -x CLAS12ROOT $HOME/j/clas12root
+    #   set -xp PATH $CLAS12ROOT/bin
+    #   set -xp LD_LIBRARY_PATH $CLAS12ROOT/lib
+    # end
 
     # rcdb
     set -x RCDB_CONNECTION mysql://rcdb@clasdb.jlab.org/rcdb

@@ -38,6 +38,7 @@ return {
       vim.keymap.set({'n', 'v'}, [[Lf]], vim.lsp.buf.code_action)
       vim.keymap.set({'n', 'v'}, [[Ln]], vim.diagnostic.goto_next)
       vim.keymap.set({'n', 'v'}, [[Lp]], vim.diagnostic.goto_prev)
+      vim.keymap.set({'n', 'v'}, [[Ld]], vim.lsp.buf.definition)
 
       -- set list of LSPs
       local lsps = {

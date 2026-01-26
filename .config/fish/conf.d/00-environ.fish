@@ -88,9 +88,13 @@ if status --is-interactive
     # end
 
     # apptainer
-    if test (hostname) = 'altair'
-      set -x APPTAINER_TMPDIR $HOME/containers/tmp
-      set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,/arc0" | sed 's/^,//')
+    switch (hostname)
+      case 'altair'
+        set -x APPTAINER_TMPDIR $HOME/containers/tmp
+        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,/arc0" | sed 's/^,//')
+      case 'procyon'
+        set -x APPTAINER_TMPDIR $HOME/containers/tmp
+        set -x APPTAINER_CACHEDIR $HOME/containers/cache
     end
 
     # ROOT

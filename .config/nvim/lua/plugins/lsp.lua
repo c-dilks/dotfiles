@@ -10,24 +10,24 @@ return {
       'SmiteshP/nvim-navic', -- top bar, tells you where you are
       -- "ray-x/navigator.lua", -- lots of enhancements and keybindings
       -- { "ray-x/guihua.lua", build = "cd lua/fzy && make" }, -- for `ray-x/navigator.lua`
-      "ms-jpq/coq_nvim", -- auto-completion
-      { "ms-jpq/coq.artifacts", branch = "artifacts" }, -- for coq
+      -- "ms-jpq/coq_nvim", -- auto-completion
+      -- { "ms-jpq/coq.artifacts", branch = "artifacts" }, -- for coq
     },
     init = function()
-      -- coq settings
-      vim.g.coq_settings = {
-        auto_start = 'shut-up',
-        keymap = {
-          manual_complete = '<C-Space>',  -- trigger key
-          -- disable/remap the following, since they conflict with other bindings:
-          jump_to_mark = '', -- default <c-h>
-          bigger_preview = '',  -- default <c-k>
-        },
-        completion = {
-          always = false,  -- don't auto-trigger
-          sticky_manual = false, -- go away after completing something
-        },
-      }
+      -- -- coq settings
+      -- vim.g.coq_settings = {
+      --   auto_start = 'shut-up',
+      --   keymap = {
+      --     manual_complete = '<C-Space>',  -- trigger key
+      --     -- disable/remap the following, since they conflict with other bindings:
+      --     jump_to_mark = '', -- default <c-h>
+      --     bigger_preview = '',  -- default <c-k>
+      --   },
+      --   completion = {
+      --     always = false,  -- don't auto-trigger
+      --     sticky_manual = false, -- go away after completing something
+      --   },
+      -- }
     end,
     config = function()
 
@@ -70,7 +70,7 @@ return {
       }
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
-      -- ray-x/navigator
+      -- -- ray-x/navigator
       -- require('navigator').setup {
       --   keymaps = {
       --     -- disable/remap the following, since they conflict with other bindings:
@@ -98,12 +98,12 @@ return {
       --   },
       -- }
 
-      -- coq (NOTE: see `init` function above for coq settings)
-      coq = require('coq')
+      -- -- coq (NOTE: see `init` function above for coq settings)
+      -- coq = require('coq')
 
       -- LSP clangd
       if vim.fn.executable('clangd') == 1 then
-        vim.lsp.enable('clangd', coq.lsp_ensure_capabilities({
+        vim.lsp.enable('clangd', { -- coq.lsp_ensure_capabilities({
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern(
                 'Makefile',
@@ -121,7 +121,7 @@ return {
               )(fname) or
               require('lspconfig.util').find_git_ancestor(fname)
           end,
-        }))
+        }) -- ) coq
       end
 
       -- LSP jdtls

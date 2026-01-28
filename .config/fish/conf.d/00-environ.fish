@@ -118,7 +118,7 @@ if status --is-interactive
       set -xp RUBYLIB $HOME/builds/RubyROOT-install/lib/ruby
     end
 
-    # clas12root
+    # # clas12root
     # if test -d $HOME/j/clas12root
     #   set -x CLAS12ROOT $HOME/j/clas12root
     #   set -xp PATH $CLAS12ROOT/bin
@@ -156,15 +156,15 @@ if status --is-interactive
     # software which OVERRIDES ifarm modules
     # --------------------------------------------------------------------------------
 
-    # iguana
-    set -l iguana_prefix $HOME/j/iguana/install
-    if test -d $iguana_prefix
-      set -xp PKG_CONFIG_PATH $iguana_prefix/lib/pkgconfig
-      set -xp PATH $iguana_prefix/bin
-      set -xp LD_LIBRARY_PATH $iguana_prefix/lib
-      set -xp PYTHONPATH $iguana_prefix/python
-      set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
-    end
+    # # iguana
+    # set -l iguana_prefix $HOME/j/iguana/install
+    # if test -d $iguana_prefix
+    #   set -xp PKG_CONFIG_PATH $iguana_prefix/lib/pkgconfig
+    #   set -xp PATH $iguana_prefix/bin
+    #   set -xp LD_LIBRARY_PATH $iguana_prefix/lib
+    #   set -xp PYTHONPATH $iguana_prefix/python
+    #   set -xp ROOT_INCLUDE_PATH $iguana_prefix/include
+    # end
 
     # pythia8
     set -l pythia_prefix $HOME/j/pythia/install

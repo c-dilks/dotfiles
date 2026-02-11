@@ -36,6 +36,7 @@ abbr apprs 'apptainer run --fakeroot --writable-tmpfs --no-mount bind-paths --co
 # clusters
 abbr sq "squeue --me --format '%.18i %.30j %.8T %.10M %.10l %Q'"
 abbr jcacheq "jcache pendingRequest -u $USER"
+abbr jasmineq "jcache pendingRequest -u $USER"
 
 # qadb
 abbr mmm "modify.sh misc"

@@ -174,13 +174,11 @@ if status --is-interactive
       set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
     end
 
-    # coatjava
-    if test -d $HOME/j/coatjava/coatjava
-      set -x COATJAVA $HOME/j/coatjava/coatjava
-      set -xp PATH $COATJAVA/bin
-    end
-    # test -n "$COATJAVA" && set -xp CLASSPATH "$COATJAVA/lib/clas/*"
-
+    # # coatjava
+    # if test -d $HOME/j/coatjava/coatjava
+    #   set -x COATJAVA $HOME/j/coatjava/coatjava
+    #   set -xp PATH $COATJAVA/bin
+    # end
 
   end # if not in_apptainer_container
 end # if status --is-interactive

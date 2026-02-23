@@ -1,0 +1,18 @@
+layout {
+  pane_template name="dev" {
+    cwd "~/j/iguana"
+  }
+  pane size=1 borderless=true {
+    plugin location="tab-bar"
+  }
+  pane split_direction="vertical" {
+    pane split_direction="horizontal" {
+      dev
+      dev
+    }
+    dev size="60%" focus=true
+  }
+  pane size=1 borderless=true {
+    plugin location="status-bar"
+  }
+}

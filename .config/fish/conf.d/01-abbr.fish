@@ -3,6 +3,9 @@ abbr mv 'mv -v'
 abbr rm 'rm -v'
 abbr open 'xdg-open'
 
+# zellij
+abbr zz 'zellij --layout welcome attach --create zzz'
+
 # bass
 abbr bsource 'bass source'
 

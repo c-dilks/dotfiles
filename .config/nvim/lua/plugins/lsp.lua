@@ -38,7 +38,19 @@ return {
       vim.keymap.set({'n', 'v'}, [[Lf]], vim.lsp.buf.code_action)
       vim.keymap.set({'n', 'v'}, [[Ln]], vim.diagnostic.goto_next)
       vim.keymap.set({'n', 'v'}, [[Lp]], vim.diagnostic.goto_prev)
-      vim.keymap.set({'n', 'v'}, [[Ld]], vim.lsp.buf.definition)
+      vim.api.nvim_create_autocmd('LspAttach', { -- these keybindings can only be used after LSP initializes
+        callback = function(args)
+          local opts = { buffer = args.buf }
+          vim.keymap.set('n', 'gd', function()
+            vim.cmd("normal! m'") -- push current pos to jumplist so <C-o> behaves correctly
+            vim.lsp.buf.definition()
+          end, opts)
+          vim.keymap.set('n', 'gD', function()
+            vim.cmd("normal! m'") -- push current pos to jumplist so <C-o> behaves correctly
+            vim.lsp.buf.declaration()
+          end, opts)
+        end,
+      })
 
       -- set list of LSPs
       local lsps = {

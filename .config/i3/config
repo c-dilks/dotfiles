@@ -212,22 +212,11 @@ for_window [class="org-codehaus-groovy-tools-GroovyStarter" instance="org-codeha
 for_window [class="Matplotlib"] floating enable
 
 # colorscheme
-set $bg     #004400
-set $bg2    #0033aa
-set $fg     #9f9f9f
-set $hi     #efef8f
-set $ac     #00cc77
-set $tx     #040404
-set $ia     #DDDDDD
-set $be     #8faf9f
-set $yw     #ccdc90
-set $gn     #88b090
-set $rd     #e89393
-# set some nice colors      border     background  text
-client.focused              $ac        $ac         $tx
-client.unfocused            $bg        $bg         $ia
-client.focused_inactive     $bg        $bg2        $ia
-client.urgent               $rd        $rd         $tx
+# object                    border     background  text
+client.focused              #00ffff    #00bbbb     #000000
+client.unfocused            #005555    #002222     #ffffff
+client.focused_inactive     #880088    #440044     #ffffff
+client.urgent               #e89393    #e89393     #040404
 
 # startup
 # exec --no-startup-id xrdb -merge ~/.Xdefaults

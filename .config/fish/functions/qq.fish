@@ -35,9 +35,11 @@ function qq --description 'open dev layout'
   sleep 0.5
   i3-msg "split h"
   alacritty --working-directory $dir2 &
+  disown
   sleep 0.5
   i3-msg "focus left; split v"
   alacritty --working-directory $dir3 &
+  disown
   sleep 0.5
   i3-msg "focus right; resize grow left 300 px"
   sleep 0.5

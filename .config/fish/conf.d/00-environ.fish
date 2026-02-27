@@ -95,6 +95,8 @@ if status --is-interactive
       case 'procyon'
         set -x APPTAINER_TMPDIR $HOME/containers/tmp
         set -x APPTAINER_CACHEDIR $HOME/containers/cache
+      case 'eltanin'
+        set -x APPTAINER_TMPDIR $HOME/containers/tmp
     end
 
     # ROOT

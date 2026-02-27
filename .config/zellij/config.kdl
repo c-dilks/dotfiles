@@ -74,7 +74,7 @@ keybinds clear-defaults=true {
         bind "j" { Resize "Increase down"; }
         bind "k" { Resize "Increase up"; }
         bind "l" { Resize "Increase right"; }
-        bind "Ctrl n" { SwitchToMode "normal"; }
+        bind "Ctrl q" { SwitchToMode "normal"; }
     }
     move {
         bind "left" { MovePane "left"; }
@@ -163,7 +163,7 @@ keybinds clear-defaults=true {
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Shift Super p" { ToggleGroupMarking; }
         bind "Super p" { TogglePaneInGroup; }
-        bind "Ctrl q" { Quit; }
+        // bind "Ctrl q" { Quit; }
     }
     shared_except "locked" "session" {
         bind "Ctrl o" { SwitchToMode "session"; }
@@ -181,7 +181,7 @@ keybinds clear-defaults=true {
         bind "Ctrl p" { SwitchToMode "pane"; }
     }
     shared_except "locked" "resize" {
-        bind "Ctrl n" { SwitchToMode "resize"; }
+        bind "Ctrl q" { SwitchToMode "resize"; }
     }
     shared_except "normal" "locked" {
         bind "Super left" { MoveFocusOrTab "left"; }

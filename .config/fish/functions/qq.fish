@@ -7,20 +7,20 @@ function qq --description 'open dev layout'
 
   switch $argv[1]
 
-    case 'b*';    set d ~/j/bihadro
-    case 'calc*'; set d ~/j/calib/calcode
-    case 'cali*'; set d ~/j/calib/calico
-    case 'cl*';   set d ~/j/clas12root
-    case 'co*';   set d ~/j/coatjava
-    case 'd*';    set d ~/j/dispin
-    case 'e*';    set d ~/j/env
-    case 'f*';    set d ~/j/container-forge
-    case 'h*';    set d ~/j/hipo-cpp; set dir1 $d/build
-    case 'i*';    set d ~/j/iguana;   set dir1 $d/build
-    case 'o*';    set d ~/j/orca
-    case 'q*';    set d ~/j/dm/clas12-qadb
-    case 't*';    set d ~/j/dm/clas12-timeline
-    case 'w*';    set d ~/j/wok
+    case 'b*';   set d ~/j/bihadro
+    case 'cai*'; set d ~/j/calib/caiman
+    case 'cal*'; set d ~/j/calib/calcode
+    case 'cl*';  set d ~/j/clas12root
+    case 'co*';  set d ~/j/coatjava
+    case 'd*';   set d ~/j/dispin
+    case 'e*';   set d ~/j/env
+    case 'f*';   set d ~/j/container-forge
+    case 'h*';   set d ~/j/hipo-cpp; set dir1 $d/build
+    case 'i*';   set d ~/j/iguana;   set dir1 $d/build
+    case 'o*';   set d ~/j/orca
+    case 'q*';   set d ~/j/dm/clas12-qadb
+    case 't*';   set d ~/j/dm/clas12-timeline
+    case 'w*';   set d ~/j/wok
 
     case '*'
       echo "error: unknown argument" >&2

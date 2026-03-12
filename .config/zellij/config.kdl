@@ -387,6 +387,7 @@ default_shell "fish"
 // the stdin of the program to perform the copy. This can be used with
 // terminal emulators which do not support the OSC 52 ANSI control sequence
 // that will be used by default if this option is not set.
+copy_command ""
 // Examples:
 //
 // copy_command "xclip -selection clipboard" // x11
@@ -402,12 +403,12 @@ default_shell "fish"
 //   - system (default)
 //   - primary
 // 
-// copy_clipboard "primary"
+copy_clipboard "system"
  
 // Enable automatic copying (and clearing) of selection when releasing mouse
 // Default: true
 // 
-// copy_on_select true
+copy_on_select false
  
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL

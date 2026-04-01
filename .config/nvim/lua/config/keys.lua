@@ -36,6 +36,9 @@ leader_commands({
   },
 })
 
+--caiman convenience: paste from clipboard at the end of the line
+-- vim.keymap.set({'n'}, [[P]], [[A<Esc>"+p]])
+
 -- page up, down, left, right
 for key, bind in pairs({
   k = [[<C-U>]],

@@ -44,6 +44,11 @@ abbr jasmineq "jcache pendingRequest -u $USER"
 # qadb
 abbr mmm "modify.sh misc"
 
+# coatjava
+abbr cjb "./build-coatjava.sh -T8"
+abbr cjc "./build-coatjava.sh --clean"
+abbr cjcb "./build-coatjava.sh --clean && ./build-coatjava.sh -T8"
+
 # shortcut directories
 abbr bbb "cd $HOME/j/bihadro"
 abbr ccc "cd $HOME/j/coatjava"

@@ -8,8 +8,8 @@ function qq --description 'open dev layout'
   switch $argv[1]
 
     case 'b*';   set d ~/j/bihadro
-    case 'cai*'; set d ~/j/calib/caiman
-    case 'cal*'; set d ~/j/calib/calcode
+    case 'cai*'; set d ~/j/caiman
+    case 'cal*'; set d ~/j/calcode
     case 'cl*';  set d ~/j/clas12root
     case 'co*';  set d ~/j/coatjava
     case 'd*';   set d ~/j/dispin

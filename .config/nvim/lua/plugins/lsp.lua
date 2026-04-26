@@ -1,11 +1,35 @@
--- INSTALLATION
--- Java:
---   :MasonInstall jdtls
---   :TSInstall java
--- C++:
---   :MasonInstall clangd
---   :TSInstall cpp
---   :TSInstall c
+--[[
+
+INSTALLATION
+- Notes
+  - Use Mason to install LSP servers, and TreeSitter to install language plugins
+  - Run `:Mason` to see LSP servers
+  - I prefer to do this manually, since on some machines installation may fail (firewall blocks, etc.)
+- Java:
+  - `:MasonInstall jdtls`
+    - if you get a failure to download 'lombok.jar', see below
+  - `:TSInstall java`
+- C++:
+  - `:MasonInstall clangd`
+  - `:TSInstall cpp`
+  - `:TSInstall c`
+
+TROUBLESHOOTING
+- jdtls: exits with code 13 and signal 0:
+  - jdtls cache may have gotten in a bad state, wipe it:
+    - `rm -rI ~/.cache/nvim/jdtls`
+    - `rm -rI ~/.cache/jdtls`
+    - `rm -rI ~/.local/share/jdtls`
+
+- jdtls: failure to download lombok.jar when installing jdtls
+  - may be blocked by firewall
+  - get it on an unblocked machine: `wget https://projectlombok.org/downloads/lombok.jar`
+  - open Mason registry configuration: `~/.local/share/nvim/mason/registries/github/mason-org/mason-registry/registry.json`
+    - edit the `lombok` download link for `lombok.jar` for the `linux` target to be `file:///path/to/lombok.jar`
+  - retry `:MasonInstall jdtls`
+
+--]]
+
 
 return {
   {

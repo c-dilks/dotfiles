@@ -1,3 +1,12 @@
+-- INSTALLATION
+-- Java:
+--   :MasonInstall jdtls
+--   :TSInstall java
+-- C++:
+--   :MasonInstall clangd
+--   :TSInstall cpp
+--   :TSInstall c
+
 return {
   {
     'neovim/nvim-lspconfig',
@@ -5,7 +14,6 @@ return {
     lazy = false,
     dependencies = {
       'williamboman/mason.nvim', -- package manager
-      'williamboman/mason-lspconfig.nvim',
       'nvim-treesitter/nvim-treesitter', -- syntax tree, etc.
       'SmiteshP/nvim-navic', -- top bar, tells you where you are
     },
@@ -34,25 +42,8 @@ return {
         end,
       })
 
-      -- set list of LSPs
-      local lsps = {
-        'clangd',
-        'jdtls',
-      }
-      -- choose only LSPs which are available
-      local lsps_avail = {}
-      for i,lsp in ipairs(lsps) do
-        if vim.fn.executable(lsp) == 1 then
-          table.insert(lsps_avail, lsp)
-        end
-      end
-
       -- mason
       require('mason').setup()
-      require('mason-lspconfig').setup {
-        ensure_installed = lsps_avail,
-        automatic_installation = true,
-      }
 
       -- navic
       require('nvim-navic').setup {
@@ -65,26 +56,15 @@ return {
       }
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
-      -- LSP clangd
-      if vim.fn.executable('clangd') == 1 then
-        vim.lsp.enable('clangd', {
-          filetypes = {'cpp', 'c'},
-          root_markers = {
-            { 'meson.build' },
-            { '.git' },
-          },
-        })
-      end
-
-      -- LSP jdtls
-      if vim.fn.executable('jdtls') == 1 then
-        vim.lsp.enable('jdtls', {
-          filetypes = {'java'},
-          root_markers = {
-            { 'pom.xml' },
-            { '.git' },
-          },
-        })
+      -- enable LSPs
+      lsps = {
+        'clangd',
+        'jdtls',
+      }
+      for i,lsp in ipairs(lsps) do
+        if vim.fn.executable(lsp) == 1 then
+          vim.lsp.enable(lsp)
+        end
       end
 
     end,

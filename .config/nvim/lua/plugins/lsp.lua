@@ -68,29 +68,22 @@ return {
       -- LSP clangd
       if vim.fn.executable('clangd') == 1 then
         vim.lsp.enable('clangd', {
-          root_dir = function(fname)
-            return vim.fs.root(fname, {
-              'Makefile',
-              'configure.ac',
-              'configure.in',
-              'config.h.in',
-              'meson.build',
-              'meson.options',
-              'compile_commands.json',
-              'build.ninja'
-            })
-          end,
+          filetypes = {'cpp', 'c'},
+          root_markers = {
+            { 'meson.build' },
+            { '.git' },
+          },
         })
       end
 
       -- LSP jdtls
       if vim.fn.executable('jdtls') == 1 then
         vim.lsp.enable('jdtls', {
-          root_dir = function(fname)
-            return vim.fs.root(fname, {
-              'pom.xml'
-            })
-          end,
+          filetypes = {'java'},
+          root_markers = {
+            { 'pom.xml' },
+            { '.git' },
+          },
         })
       end
 

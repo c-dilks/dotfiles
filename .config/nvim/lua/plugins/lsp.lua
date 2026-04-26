@@ -91,6 +91,18 @@ return {
         end
       end
 
+      -- workaround for https://github.com/neovim/neovim/issues/37166
+      vim.lsp.config('jdtls', {
+        on_attach = function(client, bufnr)
+          client.server_capabilities.definitionProvider = true
+          client.server_capabilities.hoverProvider = true
+          client.server_capabilities.documentFormattingProvider = true
+          client.server_capabilities.documentRangeFormattingProvider = true
+          client.server_capabilities.renameProvider = true
+          client.server_capabilities.inlayHintProvider = true
+        end,
+      })
+
     end,
   },
 }

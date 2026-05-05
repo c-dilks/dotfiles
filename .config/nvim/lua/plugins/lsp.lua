@@ -2,17 +2,13 @@
 
 INSTALLATION
 - Notes
-  - Use Mason to install LSP servers, and TreeSitter to install language plugins
-  - Run `:Mason` to see LSP servers
+  - Use Mason to install LSP servers; run `:Mason`
   - I prefer to do this manually, since on some machines installation may fail (firewall blocks, etc.)
 - Java:
   - `:MasonInstall jdtls`
     - if you get a failure to download 'lombok.jar', see below
-  - `:TSInstall java`
 - C++:
-  - `:MasonInstall clangd`
-  - `:TSInstall cpp`
-  - `:TSInstall c`
+  - I prefer system `clangd`, but if you want, `:MasonInstall clangd`
 
 TROUBLESHOOTING
 - jdtls: exits with code 13 and signal 0:
@@ -33,36 +29,66 @@ TROUBLESHOOTING
 
 return {
   {
-    'neovim/nvim-lspconfig',
+    'mason-org/mason.nvim', -- package manager
     enabled = true,
     lazy = false,
     dependencies = {
-      'williamboman/mason.nvim', -- package manager
       'SmiteshP/nvim-navic', -- top bar, tells you where you are
     },
     init = function()
     end,
     config = function()
 
-      -- general keybindings
-      vim.keymap.set({'n', 'v'}, [[Ls]], [[<Cmd>LspStop<CR>]])
-      vim.keymap.set({'n', 'v'}, [[Lq]], [[<Cmd>LspStart<CR>]])
-      vim.keymap.set({'n', 'v'}, [[Li]], [[<Cmd>LspInfo<CR>]])
-      vim.keymap.set({'n', 'v'}, [[Lf]], vim.lsp.buf.code_action)
-      vim.keymap.set({'n', 'v'}, [[Ln]], vim.diagnostic.goto_next)
-      vim.keymap.set({'n', 'v'}, [[Lp]], vim.diagnostic.goto_prev)
+      -- keybindings
       vim.api.nvim_create_autocmd('LspAttach', { -- these keybindings can only be used after LSP initializes
         callback = function(args)
-          local opts = { buffer = args.buf }
-          vim.keymap.set('n', 'gd', function()
+          -- common `vim.keymap.set` wrapper
+          local lsp_keymap = function(mode, lhs, rhs)
+            vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, silent = true })
+          end
+          -- enable/disable
+          lsp_keymap({'n'}, [[Ls]], function()
+            vim.cmd('lsp disable')
+          end)
+          lsp_keymap({'n'}, [[Lq]], function()
+            vim.cmd('lsp enable')
+          end)
+          -- diagnostic jump
+          lsp_keymap({'n'}, [[Ln]], function()
+            vim.diagnostic.jump({ count = 1, float = true })
+          end)
+          lsp_keymap({'n'}, [[Lp]], function()
+            vim.diagnostic.jump({ count = -1, float = true })
+          end)
+          -- diagnostic fix
+          lsp_keymap({'n'}, [[Lf]], function()
+            vim.lsp.buf.code_action()
+          end)
+          -- rename
+          lsp_keymap({'n'}, [[LR]], function()
+            vim.lsp.buf.rename()
+          end)
+          -- gotos
+          lsp_keymap({'n'}, [[K]], function()
+            vim.lsp.buf.hover()
+          end)
+          lsp_keymap('n', [[gd]], function()
             vim.cmd("normal! m'") -- push current pos to jumplist so <C-o> behaves correctly
             vim.lsp.buf.definition()
-          end, opts)
-          vim.keymap.set('n', 'gD', function()
+          end)
+          lsp_keymap('n', [[gD]], function()
             vim.cmd("normal! m'") -- push current pos to jumplist so <C-o> behaves correctly
             vim.lsp.buf.declaration()
-          end, opts)
-        end,
+          end)
+          lsp_keymap('n', [[gi]], function()
+            vim.cmd("normal! m'") -- push current pos to jumplist so <C-o> behaves correctly
+            vim.lsp.buf.implementation()
+          end)
+          -- references
+          lsp_keymap({'n'}, [[Lr]], function()
+            vim.lsp.buf.references()
+          end)
+        end
       })
 
       -- mason
@@ -80,6 +106,8 @@ return {
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
       -- enable LSPs
+      -- NOTE: their configurations are found in `../../lsp/`
+      -- NOTE: use `:Mason` to install servers, or your system package manager (see note at the top)
       lsps = {
         'clangd',
         'jdtls',
@@ -89,18 +117,6 @@ return {
           vim.lsp.enable(lsp)
         end
       end
-
-      -- workaround for https://github.com/neovim/neovim/issues/37166
-      vim.lsp.config('jdtls', {
-        on_attach = function(client, bufnr)
-          client.server_capabilities.definitionProvider = true
-          client.server_capabilities.hoverProvider = true
-          client.server_capabilities.documentFormattingProvider = true
-          client.server_capabilities.documentRangeFormattingProvider = true
-          client.server_capabilities.renameProvider = true
-          client.server_capabilities.inlayHintProvider = true
-        end,
-      })
 
     end,
   },

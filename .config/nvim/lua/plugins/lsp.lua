@@ -38,7 +38,6 @@ return {
     lazy = false,
     dependencies = {
       'williamboman/mason.nvim', -- package manager
-      'nvim-treesitter/nvim-treesitter', -- syntax tree, etc.
       'SmiteshP/nvim-navic', -- top bar, tells you where you are
     },
     init = function()

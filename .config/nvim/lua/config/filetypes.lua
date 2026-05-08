@@ -11,10 +11,15 @@ au Filetype python
       \ | setlocal nosmartindent
       \ | setlocal fileformat=unix
 " latex
-au Filetype tex,markdown
+au Filetype tex
       \ set tw=0
       \ | set spell
       \ | set wrap
+      \ | set linebreak
+" markdown
+au Filetype markdown
+      \ set tw=0
+      \ | set spell
       \ | set linebreak
 " asymptote
 augroup filetypedetect

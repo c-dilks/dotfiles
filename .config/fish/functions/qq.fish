@@ -19,6 +19,7 @@ function qq --description 'open dev layout'
     case 'i*';   set d ~/j/iguana;   set dir1 $d/build
     case 'o*';   set d ~/j/orca
     case 'q*';   set d ~/j/dm/clas12-qadb
+    case 'ss*';  set d ~/j/clas-stringspinner; set dir1 $d/build
     case 't*';   set d ~/j/dm/clas12-timeline
     case 'w*';   set d ~/j/wok
 
@@ -30,6 +31,9 @@ function qq --description 'open dev layout'
   [ -z "$dir1" ] && set dir1 $d
   [ -z "$dir2" ] && set dir2 $d
   [ -z "$dir3" ] && set dir3 $d
+  [ ! -d "$dir1" ] && echo "warning: '$dir1' does not exist" && set dir1 $d
+  [ ! -d "$dir2" ] && echo "warning: '$dir2' does not exist" && set dir2 $d
+  [ ! -d "$dir3" ] && echo "warning: '$dir3' does not exist" && set dir3 $d
 
   cd $dir1
   sleep 0.5

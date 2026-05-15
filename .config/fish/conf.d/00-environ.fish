@@ -176,11 +176,12 @@ if status --is-interactive
       set -x  PYTHIA8DATA     $pythia_prefix/share/Pythia8/xmldoc
     end
 
-    # # coatjava
-    # if test -d $HOME/j/coatjava/coatjava
-    #   set -x COATJAVA $HOME/j/coatjava/coatjava
-    #   set -xp PATH $COATJAVA/bin
-    # end
+    # coatjava
+    set -l coatjava_prefix $HOME/j/coatjava/coatjava
+    if test -d $coatjava_prefix
+      # set -x COATJAVA $coatjava_prefix # prefer to keep this off, for cleaner consumer testing
+      set -xp PATH $coatjava_prefix/bin
+    end
 
   end # if not in_apptainer_container
 end # if status --is-interactive

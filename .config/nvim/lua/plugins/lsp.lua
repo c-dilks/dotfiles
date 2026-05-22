@@ -11,6 +11,12 @@ INSTALLATION
   - I prefer system `clangd`, but if you want, `:MasonInstall clangd`
 
 TROUBLESHOOTING
+
+- need to start over from a clean slate?
+  - `rm -rf ~/.local/share/nvim` (local data and plugins)
+  - `rm -rf ~/.cache/nvim`       (cache)
+  - `rm -rf ~/.local/state/nvim` (state)
+
 - jdtls: exits with code 13 and signal 0:
   - jdtls cache may have gotten in a bad state, wipe it:
     - `rm -rI ~/.cache/nvim/jdtls`

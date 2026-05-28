@@ -7,7 +7,7 @@ function qq --description 'open dev layout'
 
   switch $argv[1]
 
-    case 'b*';   set d ~/j/bihadro; set dir1 $d/build
+    case 'b*';   set d ~/j/bihadro
     case 'cai*'; set d ~/j/caiman
     case 'cal*'; set d ~/j/calcode
     case 'cl*';  set d ~/j/clas12root

@@ -5,9 +5,9 @@ require 'colorize'
 
 ##############################
 FRACTIONS = {
-  :total => 1.0,
-  :BOPS  => 0.85,
-  :BRES  => 0.15,
+  :r => 0.15, # BRES
+  :o => 0.85, # BOPS
+  :t => 1.0,  # total
 }
 DAILY_HOURS = 8.0
 ##############################
@@ -66,16 +66,12 @@ oweHash = subHash.map do |name,debt|
 end.to_h
 
 # print
-puts """
-Total Number of Days: #{numDays.to_s.colorize(:color => :green, :mode => :bold)}
-
-Required Hours:
-"""
-ap hourHash.sort.to_h
-puts ""
+puts "#{numDays.to_s.colorize(:color => :green, :mode => :bold)} da"
+puts "req:"
+ap hourHash.to_h
 
 if subHash.length > 0
-  puts "Owed Hours:"
-  ap oweHash.sort.to_h
+  puts "diff:"
+  ap oweHash.to_h
 end
 

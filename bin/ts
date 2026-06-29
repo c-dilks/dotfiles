@@ -1,77 +1,64 @@
 #!/usr/bin/env ruby
 
 require 'awesome_print'
-require 'colorize'
 
 ##############################
 FRACTIONS = {
   :r => 0.20, # BRES
   :o => 0.80, # BOPS
-  :t => 1.0,  # total
+  :q => nil,  # QCDDAT (nil, since 'optional' project)
 }
-DAILY_HOURS = 8.0
 ##############################
 
+# usage
 unless ARGV.length > 0
   $stderr.puts """
   USAGE #{File.basename $0} [NUM DAYS]... [SUBTRACTIONS]...
-  - all [NUM DAYS] args will be summed
-  - specify one of the project codes (case insensitive) to start 
-    subtraction mode; all numbers thereafter will be subtracted
-    from the total, so this will tell you how many hours you owe
-    given some number of hours worked
-    - example:
-         5 bres 5
-         owe 3 hours on BRES, since need 8 hours in a 5 day period
+
+  NUM_DAYS   number of days in timesheet period; delimit
+             by spaces (to add them)
+
+  WORKED     (optional) each argument should be a project code,
+             a comma, then the number of hours worked
+             default: 0 for all projects
   """
   exit 2
 end
 
-numDays = 0.0
-subHash = Hash.new
-subProj = nil
+# parse arguments
+num_da   = 0.0
+wrk_hash = FRACTIONS.keys.map{ |it| [it, 0.0] }.to_h
 ARGV.each do |arg|
-
-  isKeyword = (Float(arg) rescue nil).nil?
-
-  if isKeyword # is a project code, trigger subtraction mode
-    projIdx = FRACTIONS.keys
-      .map(&:to_s)
-      .map(&:downcase)
-      .find_index(arg.downcase)
-    if projIdx.nil?
-      $stderr.puts "ERROR: project '#{arg}' not found"
-      exit 1
-    end
-    subProj = FRACTIONS.keys[projIdx]
-    subHash[subProj] = 0.0
-
-  else # not a project code
-    if subProj.nil? # subtraction mode is not enabled, count days
-      numDays += arg.to_f
-    else # subtraction mode is enabled
-      subHash[subProj] = subHash[subProj] - arg.to_f
-    end
+  case arg
+  when /,/
+    proj  = arg.split(',')[0].to_sym
+    hours = arg.split(',')[1].to_f
+    raise "project '#{proj}' not found" unless wrk_hash.has_key? proj
+    wrk_hash[proj] += hours.to_f
+  else
+    num_da += arg.to_f
   end
 end
 
-# calculate number of required hours
-hourHash = FRACTIONS.map do |name,frac|
-  [ name, frac * DAILY_HOURS * numDays ]
-end.to_h
+# total required hours
+req_hours_total  = num_da * 8
 
-# calculate number of owed hours
-oweHash = subHash.map do |name,debt|
-  [ name, hourHash[name] + debt ]
+# total required hours, after subtracting optional projects
+req_hours_subbed = req_hours_total
+FRACTIONS.each do |proj,frac|
+  req_hours_subbed -= wrk_hash[proj] if frac.nil?
+end
+
+# calculate required hours for each project, subtracting worked hours
+req_hash = FRACTIONS.map do |proj,frac|
+  if frac.nil?
+    [proj, 0.0]
+  else
+    [proj, req_hours_subbed * frac - wrk_hash[proj]]
+  end
 end.to_h
 
 # print
-puts "#{numDays.to_s.colorize(:color => :green, :mode => :bold)} da"
-puts "req:"
-ap hourHash.to_h
-
-if subHash.length > 0
-  puts "diff:"
-  ap oweHash.to_h
-end
-
+ap({num_da:}, color: {float: :red })
+ap({wrk_hash:}, color: {float: :red })
+ap({req_hash:}, color: {float: :red })

@@ -4,38 +4,37 @@ function aa --description 'run apptianer image'
 
   switch $argv[1]
 
+    # see `qq` switch statement to understand what these cases are
     case 'b*'
-      set dir0 ~/j/bihadro
+      set im none
     case 'cai*'
-      set dir0 ~/j/caiman
+      set im none
     case 'cal*'
-      set dir0 ~/j/calcode
+      set im none
     case 'cl*'
-      set dir0 ~/j/clas12root
+      set im none
     case 'co*'
-      set dir0 ~/j/coatjava
+      set im none
     case 'd*'
-      set dir0 ~/j/dispin
+      set im none
     case 'e*'
-      set dir0 ~/j/env
+      set im none
     case 'f*'
-      set dir0 ~/j/container-forge
+      set im none
     case 'h*'
-      set dir0 ~/j/hipo-cpp
-      set dir1 $dir0/build
+      set im none
     case 'i*'
       set im ~/containers/base_root_latest.sif
     case 'o*'
-      set dir0 ~/j/orca
+      set im none
     case 'q*'
-      set dir0 ~/j/dm/clas12-qadb
+      set im none
     case 'ss*'
-      set dir0 ~/j/clas-stringspinner
-      set dir1 $dir0/build
+      set im none
     case 't*'
-      set dir0 ~/j/dm/clas12-timeline
+      set im none
     case 'w*'
-      set dir0 ~/j/wok
+      set im none
     case '*'
       echo "error: unknown argument" >&2
       return 1

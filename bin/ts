@@ -62,3 +62,4 @@ end.to_h
 ap({num_da:}, color: {float: :red })
 ap({wrk_hash:}, color: {float: :red })
 ap({req_hash:}, color: {float: :red })
+puts "rec_total: #{req_hours_total}"

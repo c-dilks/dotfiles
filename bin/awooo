@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'awesome_print'
+
+raise "USAGE: #{File.basename $1} [HOURS]" if ARGV.empty?
+hours = ARGV[0].to_f
+
+req = {
+  :r => 0.2,
+  :o => 0.8,
+}
+
+ap req.map{ |k,v| [k, hours*v] }.to_h, color: {float: :red }

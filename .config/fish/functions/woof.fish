@@ -1,4 +1,4 @@
-function ww --description 'open dev layout'
+function woof --description 'open dev layout'
 
   set dir0 '' # default directory
   set dir1 '' # directory for 1st window

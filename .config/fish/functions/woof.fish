@@ -58,12 +58,12 @@ function woof --description 'open dev layout'
   cd $dir1
   sleep 0.5
   i3-msg "split h"
-  alacritty --working-directory $dir2 --command fish -c "aa $argv[1]; exec fish" &
+  alacritty --working-directory $dir2 --command fish -c "arf $argv[1]; exec fish" &
   disown
 
   sleep 0.5
   i3-msg "focus left; split v"
-  alacritty --working-directory $dir3 --command fish -c "aa $argv[1]; exec fish" &
+  alacritty --working-directory $dir3 --command fish -c "arf $argv[1]; exec fish" &
   disown
 
   sleep 0.5
@@ -73,6 +73,6 @@ function woof --description 'open dev layout'
 
   sleep 0.5
   i3-msg "focus up"
-  aa $argv[1]
+  arf $argv[1]
 
 end

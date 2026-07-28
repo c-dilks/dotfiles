@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require 'awesome_print'
+
+raise "USAGE: #{File.basename $0} [DAYS...]" if ARGV.empty?
+days = ARGV.map{ |a| a.to_i }.sum
+req = { :h => days*8 }
+ap req, color: {float: :red }

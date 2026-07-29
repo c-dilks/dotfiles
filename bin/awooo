@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require 'awesome_print'
 
-raise "USAGE: #{File.basename $0} [HOURS]" if ARGV.empty?
-hours = ARGV[0].to_f
+raise "USAGE: #{File.basename $0} [HOURS...]" if ARGV.empty?
+hours = ARGV.map(&:to_f).sum
 
 req = {
   :r => 0.2,

@@ -3,6 +3,9 @@ abbr mv 'mv -v'
 abbr rm 'rm -v'
 abbr open 'xdg-open'
 
+# `du -sh */` that ignores symlinks to directories
+abbr dud 'find . -maxdepth 1 -mindepth 1 -type d -exec du -sh {} +'
+
 # zellij
 abbr zz 'zellij --layout welcome attach --create zzz'
 

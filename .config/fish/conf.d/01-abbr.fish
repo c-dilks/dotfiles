@@ -22,7 +22,6 @@ abbr tmuxs 'tmux new -s'
 abbr tmuxl 'tmux ls'
 
 # neovim
-abbr vim 'nvim'
 abbr vi 'nvim'
 abbr v 'nvim'
 abbr vd 'nvim -d'

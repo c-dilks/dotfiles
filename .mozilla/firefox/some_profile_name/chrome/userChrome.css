@@ -1,4 +1,5 @@
 /* settings for Tree Style Tab */
+/* these should go .mozilla/firefox/some_profile_name/chrome/userChrome.css */
 /* requires about:config setting toolkit.legacyUserProfileCustomization.stylesheets to be true */
 
 /* hides the native tabs */

@@ -1,0 +1,8 @@
+/* CSS for Tree Style Tab */
+/* these should go TreeStyleTab's preferences -> Advanced -> User Style Sheet (and not in your `.mozilla/` directory */
+
+/* make the theme background appear in the sidebar, and control its positioning */
+#background {
+  background-position: right;
+  background-size: cover;
+}

@@ -5,8 +5,8 @@ raise "USAGE: #{File.basename $0} [HOURS...]" if ARGV.empty?
 hours = ARGV.map(&:to_f).sum
 
 req = {
-  :r => 0.2,
-  :o => 0.8,
+  :r => 0.0,
+  :o => 1.0,
 }
 
 ap req.map{ |k,v| [k, hours*v] }.to_h, color: {float: :red }

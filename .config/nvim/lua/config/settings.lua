@@ -20,3 +20,47 @@ vim.o.smartindent = true -- C-like auto indentaion
 -- diffopt
 vim.opt.diffopt:append("internal")
 vim.opt.diffopt:append("algorithm:histogram")
+
+-- make the clipboard work when in apptainer container
+-- Clipboard provider setup: real X11/Wayland tools when actually reachable,
+-- OSC52 fallback otherwise (e.g. SSH with no forwarding, or a stale $DISPLAY).
+local function x11_available()
+  if vim.fn.executable("xsel") ~= 1 or not vim.env.DISPLAY then
+    return false
+  end
+  -- $DISPLAY can be set but stale (e.g. leftover from a previous local
+  -- session, or defensively set by SSH). Actually probe the socket.
+  local ok = vim.fn.system("xset q 2>/dev/null"):find("Screen Saver") ~= nil
+  return ok
+end
+local function wayland_available()
+  if vim.fn.executable("wl-copy") ~= 1 or not vim.env.WAYLAND_DISPLAY then
+    return false
+  end
+  -- wl-copy has no cheap "ping" equivalent to xset, but checking the
+  -- runtime dir socket file existing is a reasonable proxy.
+  local runtime_dir = vim.env.XDG_RUNTIME_DIR
+  if not runtime_dir then
+    return false
+  end
+  local sock = runtime_dir .. "/" .. vim.env.WAYLAND_DISPLAY
+  return vim.uv.fs_stat(sock) ~= nil
+end
+if wayland_available() then
+  -- let nvim's built-in detection handle it; wl-copy/wl-paste just work
+  -- once WAYLAND_DISPLAY + XDG_RUNTIME_DIR are valid, no need to set g.clipboard
+elseif x11_available() then
+  -- same: nvim's built-in xsel detection is fine once the socket is real
+else
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+end

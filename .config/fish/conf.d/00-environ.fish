@@ -95,8 +95,10 @@ if status --is-interactive
       case 'procyon'
         set -x APPTAINER_TMPDIR $HOME/containers/tmp
         set -x APPTAINER_CACHEDIR $HOME/containers/cache
+        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" | sed 's/^,//') # for clipboard support in nvim with wayland host
       case 'eltanin'
         set -x APPTAINER_TMPDIR $HOME/containers/tmp
+        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" | sed 's/^,//') # for clipboard support in nvim with wayland host
     end
 
     # ROOT

@@ -11,3 +11,6 @@
 #sidebar-header {
   visibility: collapse !important;
 }
+#sidebar-panel-header {
+  display: none !important;
+}

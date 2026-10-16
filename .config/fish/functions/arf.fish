@@ -23,7 +23,7 @@ function arf --description 'run apptianer image'
     case 'f*'
       return 0
     case 'h*'
-      return 0
+      set im ~/containers/base_root_latest.sif
     case 'i*'
       set im ~/containers/base_root_latest.sif
     case 'o*'

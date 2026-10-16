@@ -87,20 +87,6 @@ if status --is-interactive
     #   end
     # end
 
-    # apptainer
-    switch (hostname)
-      case 'altair'
-        set -x APPTAINER_TMPDIR $HOME/containers/tmp
-        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,/arc0" | sed 's/^,//')
-      case 'procyon'
-        set -x APPTAINER_TMPDIR $HOME/containers/tmp
-        set -x APPTAINER_CACHEDIR $HOME/containers/cache
-        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" | sed 's/^,//') # for clipboard support in nvim with wayland host
-      case 'eltanin'
-        set -x APPTAINER_TMPDIR $HOME/containers/tmp
-        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" | sed 's/^,//') # for clipboard support in nvim with wayland host
-    end
-
     # ROOT
     if test -d $HOME/builds/root
       cd $HOME/builds/root
@@ -159,6 +145,24 @@ if status --is-interactive
     # --------------------------------------------------------------------------------
     # software which OVERRIDES ifarm modules
     # --------------------------------------------------------------------------------
+
+    # apptainer
+    switch (hostname)
+      case 'altair'
+        set -x APPTAINER_TMPDIR $HOME/containers/tmp
+        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,/arc0" | sed 's/^,//')
+      case 'procyon'
+        set -x APPTAINER_TMPDIR $HOME/containers/tmp
+        set -x APPTAINER_CACHEDIR $HOME/containers/cache
+        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" | sed 's/^,//') # for clipboard support in nvim with wayland host
+      case 'eltanin'
+        set -x APPTAINER_TMPDIR $HOME/containers/tmp
+        set -x APPTAINER_BINDPATH (echo "$APPTAINER_BINDPATH,$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" | sed 's/^,//') # for clipboard support in nvim with wayland host
+    end
+    if on_ifarm # I keep my images on /work, so put the cache and tmpdir there too, otherwise it takes forever to `pull` images
+      set -x APPTAINER_TMPDIR $HOME/containers/tmp
+      set -x APPTAINER_CACHEDIR $HOME/containers/cache
+    end
 
     # # iguana
     # set -l iguana_prefix $HOME/j/iguana/install

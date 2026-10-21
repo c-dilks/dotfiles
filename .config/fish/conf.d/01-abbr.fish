@@ -32,6 +32,14 @@ abbr msw 'meson setup --wipe'
 abbr mi 'meson install -q'
 abbr mtv 'stdbuf -o0 meson test --verbose --print-errorlogs --no-stdsplit'
 
+# maven
+abbr qm "mvn package -T$(spth)"
+abbr qi "mvn install -T$(spth)"
+abbr qv "mvn verify -T$(spth)"
+abbr qc "mvn clean -T$(spth)"
+abbr qcm "mvn clean package -T$(spth)"
+abbr qci "mvn clean install -T$(spth)"
+
 # docker
 abbr dri 'docker run -it --rm'
 
